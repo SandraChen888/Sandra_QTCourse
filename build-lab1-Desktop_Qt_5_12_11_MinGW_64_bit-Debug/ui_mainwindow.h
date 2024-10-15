@@ -291,7 +291,7 @@ public:
 
     void retranslateUi(QMainWindow *MainWindow)
     {
-        MainWindow->setWindowTitle(QApplication::translate("MainWindow", "MainWindow", nullptr));
+        MainWindow->setWindowTitle(QApplication::translate("MainWindow", "\351\231\210\344\275\251\347\221\2662022414040104", nullptr));
         btnDel->setText(QApplication::translate("MainWindow", "\342\214\253", nullptr));
         btnInverse->setText(QApplication::translate("MainWindow", "1/x", nullptr));
         btnNum2->setText(QApplication::translate("MainWindow", "2", nullptr));
