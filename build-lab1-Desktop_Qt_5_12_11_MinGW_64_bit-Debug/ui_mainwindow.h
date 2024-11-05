@@ -60,7 +60,7 @@ public:
     {
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName(QString::fromUtf8("MainWindow"));
-        MainWindow->resize(374, 241);
+        MainWindow->resize(374, 270);
         MainWindow->setStyleSheet(QString::fromUtf8("QPushButton{\n"
 "background-color: rgb(192,192,192);\n"
 "font-size:12pt;\n"
@@ -96,6 +96,9 @@ public:
         sizePolicy.setVerticalStretch(0);
         sizePolicy.setHeightForWidth(btnDel->sizePolicy().hasHeightForWidth());
         btnDel->setSizePolicy(sizePolicy);
+        btnDel->setStyleSheet(QString::fromUtf8("font: 12pt \"\351\273\221\344\275\223\";\n"
+"color: rgb(85, 170, 255);\n"
+"background-color: rgb(191, 191, 191);"));
 
         gridLayout->addWidget(btnDel, 1, 3, 1, 1);
 
@@ -103,6 +106,9 @@ public:
         btnInverse->setObjectName(QString::fromUtf8("btnInverse"));
         sizePolicy.setHeightForWidth(btnInverse->sizePolicy().hasHeightForWidth());
         btnInverse->setSizePolicy(sizePolicy);
+        btnInverse->setStyleSheet(QString::fromUtf8("font: 12pt \"\351\273\221\344\275\223\";\n"
+"color: rgb(101, 101, 101);\n"
+"background-color: rgb(191, 191, 191);"));
 
         gridLayout->addWidget(btnInverse, 2, 0, 1, 1);
 
@@ -117,6 +123,9 @@ public:
         btnClearAll->setObjectName(QString::fromUtf8("btnClearAll"));
         sizePolicy.setHeightForWidth(btnClearAll->sizePolicy().hasHeightForWidth());
         btnClearAll->setSizePolicy(sizePolicy);
+        btnClearAll->setStyleSheet(QString::fromUtf8("font: 12pt \"\351\273\221\344\275\223\";\n"
+"color: rgb(85, 170, 255);\n"
+"background-color: rgb(191, 191, 191);"));
 
         gridLayout->addWidget(btnClearAll, 1, 2, 1, 1);
 
@@ -131,6 +140,9 @@ public:
         btnMultiple->setObjectName(QString::fromUtf8("btnMultiple"));
         sizePolicy.setHeightForWidth(btnMultiple->sizePolicy().hasHeightForWidth());
         btnMultiple->setSizePolicy(sizePolicy);
+        btnMultiple->setStyleSheet(QString::fromUtf8("font: 12pt \"\351\273\221\344\275\223\";\n"
+"color: rgb(85, 170, 255);\n"
+"background-color: rgb(191, 191, 191);"));
 
         gridLayout->addWidget(btnMultiple, 3, 3, 1, 1);
 
@@ -138,6 +150,9 @@ public:
         btnMinus->setObjectName(QString::fromUtf8("btnMinus"));
         sizePolicy.setHeightForWidth(btnMinus->sizePolicy().hasHeightForWidth());
         btnMinus->setSizePolicy(sizePolicy);
+        btnMinus->setStyleSheet(QString::fromUtf8("font: 12pt \"\351\273\221\344\275\223\";\n"
+"color: rgb(85, 170, 255);\n"
+"background-color: rgb(191, 191, 191);"));
 
         gridLayout->addWidget(btnMinus, 4, 3, 1, 1);
 
@@ -145,6 +160,9 @@ public:
         btnSquare->setObjectName(QString::fromUtf8("btnSquare"));
         sizePolicy.setHeightForWidth(btnSquare->sizePolicy().hasHeightForWidth());
         btnSquare->setSizePolicy(sizePolicy);
+        btnSquare->setStyleSheet(QString::fromUtf8("font: 12pt \"\351\273\221\344\275\223\";\n"
+"color: rgb(101, 101, 101);\n"
+"background-color: rgb(191, 191, 191);"));
 
         gridLayout->addWidget(btnSquare, 2, 1, 1, 1);
 
@@ -152,6 +170,9 @@ public:
         btnPlus->setObjectName(QString::fromUtf8("btnPlus"));
         sizePolicy.setHeightForWidth(btnPlus->sizePolicy().hasHeightForWidth());
         btnPlus->setSizePolicy(sizePolicy);
+        btnPlus->setStyleSheet(QString::fromUtf8("font: 12pt \"\351\273\221\344\275\223\";\n"
+"color: rgb(85, 170, 255);\n"
+"background-color: rgb(191, 191, 191);"));
 
         gridLayout->addWidget(btnPlus, 5, 3, 1, 1);
 
@@ -187,6 +208,9 @@ public:
         btnPercentage->setObjectName(QString::fromUtf8("btnPercentage"));
         sizePolicy.setHeightForWidth(btnPercentage->sizePolicy().hasHeightForWidth());
         btnPercentage->setSizePolicy(sizePolicy);
+        btnPercentage->setStyleSheet(QString::fromUtf8("font: 12pt \"\351\273\221\344\275\223\";\n"
+"color: rgb(101, 101, 101);\n"
+"background-color: rgb(191, 191, 191);"));
 
         gridLayout->addWidget(btnPercentage, 1, 0, 1, 1);
 
@@ -215,6 +239,9 @@ public:
         btnClear->setObjectName(QString::fromUtf8("btnClear"));
         sizePolicy.setHeightForWidth(btnClear->sizePolicy().hasHeightForWidth());
         btnClear->setSizePolicy(sizePolicy);
+        btnClear->setStyleSheet(QString::fromUtf8("font: 12pt \"\351\273\221\344\275\223\";\n"
+"color: rgb(85, 170, 255);\n"
+"background-color: rgb(191, 191, 191);"));
 
         gridLayout->addWidget(btnClear, 1, 1, 1, 1);
 
@@ -236,6 +263,9 @@ public:
         btnDivide->setObjectName(QString::fromUtf8("btnDivide"));
         sizePolicy.setHeightForWidth(btnDivide->sizePolicy().hasHeightForWidth());
         btnDivide->setSizePolicy(sizePolicy);
+        btnDivide->setStyleSheet(QString::fromUtf8("font: 12pt \"\351\273\221\344\275\223\";\n"
+"color: rgb(85, 170, 255);\n"
+"background-color: rgb(191, 191, 191);"));
 
         gridLayout->addWidget(btnDivide, 2, 3, 1, 1);
 
@@ -243,6 +273,9 @@ public:
         btnEqual->setObjectName(QString::fromUtf8("btnEqual"));
         sizePolicy.setHeightForWidth(btnEqual->sizePolicy().hasHeightForWidth());
         btnEqual->setSizePolicy(sizePolicy);
+        btnEqual->setStyleSheet(QString::fromUtf8("font: 12pt \"\351\273\221\344\275\223\";\n"
+"color: rgb(255, 255, 255);\n"
+"background-color: rgb(85, 170, 255);"));
 
         gridLayout->addWidget(btnEqual, 6, 3, 1, 1);
 
@@ -250,7 +283,9 @@ public:
         btnSqrt->setObjectName(QString::fromUtf8("btnSqrt"));
         sizePolicy.setHeightForWidth(btnSqrt->sizePolicy().hasHeightForWidth());
         btnSqrt->setSizePolicy(sizePolicy);
-        btnSqrt->setStyleSheet(QString::fromUtf8(""));
+        btnSqrt->setStyleSheet(QString::fromUtf8("font: 12pt \"\351\273\221\344\275\223\";\n"
+"color: rgb(101, 101, 101);\n"
+"background-color: rgb(191, 191, 191);"));
 
         gridLayout->addWidget(btnSqrt, 2, 2, 1, 1);
 
@@ -291,7 +326,7 @@ public:
 
     void retranslateUi(QMainWindow *MainWindow)
     {
-        MainWindow->setWindowTitle(QApplication::translate("MainWindow", "\351\231\210\344\275\251\347\221\2662022414040104", nullptr));
+        MainWindow->setWindowTitle(QApplication::translate("MainWindow", "\347\216\213\346\203\240\347\201\2652022414040133", nullptr));
         btnDel->setText(QApplication::translate("MainWindow", "\342\214\253", nullptr));
         btnInverse->setText(QApplication::translate("MainWindow", "1/x", nullptr));
         btnNum2->setText(QApplication::translate("MainWindow", "2", nullptr));

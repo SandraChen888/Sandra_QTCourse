@@ -53,6 +53,7 @@ MainWindow::~MainWindow()
 }
 
 QString MainWindow::calculation(bool *ok)
+
 {
     double result = 0;
     if(operands.size()==2 && opcodes.size()>0)
