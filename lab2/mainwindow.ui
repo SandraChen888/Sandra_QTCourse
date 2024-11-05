@@ -6,20 +6,41 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>800</width>
-    <height>600</height>
+    <width>527</width>
+    <height>358</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>MainWindow</string>
   </property>
-  <widget class="QWidget" name="centralwidget"/>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QVBoxLayout" name="verticalLayout">
+    <property name="spacing">
+     <number>0</number>
+    </property>
+    <property name="leftMargin">
+     <number>1</number>
+    </property>
+    <property name="topMargin">
+     <number>1</number>
+    </property>
+    <property name="rightMargin">
+     <number>1</number>
+    </property>
+    <property name="bottomMargin">
+     <number>1</number>
+    </property>
+    <item>
+     <widget class="QPlainTextEdit" name="TextEdit"/>
+    </item>
+   </layout>
+  </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>800</width>
+     <width>527</width>
      <height>21</height>
     </rect>
    </property>
@@ -38,16 +59,25 @@
      <string>编辑(&amp;E)</string>
     </property>
     <addaction name="actionUndo"/>
+    <addaction name="actionRedo"/>
+    <addaction name="actionCut"/>
+    <addaction name="actionCopy"/>
+    <addaction name="actionPaste"/>
    </widget>
    <widget class="QMenu" name="menu_O">
     <property name="title">
      <string>格式(&amp;O)</string>
     </property>
+    <addaction name="actionFont"/>
+    <addaction name="actionLineNumber"/>
+    <addaction name="actionWrap"/>
    </widget>
    <widget class="QMenu" name="menu_V">
     <property name="title">
      <string>查看(&amp;V)</string>
     </property>
+    <addaction name="actionToolbar"/>
+    <addaction name="actionStatusbar"/>
    </widget>
    <widget class="QMenu" name="menu_H">
     <property name="title">
@@ -89,8 +119,6 @@
    <addaction name="actionLineNumber"/>
    <addaction name="actionWrap"/>
    <addaction name="separator"/>
-   <addaction name="actionToolbar"/>
-   <addaction name="actionStatusbar"/>
   </widget>
   <action name="actionNew">
    <property name="icon">
