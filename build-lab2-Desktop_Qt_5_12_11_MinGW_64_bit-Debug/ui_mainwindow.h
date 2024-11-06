@@ -64,7 +64,7 @@ public:
     {
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName(QString::fromUtf8("MainWindow"));
-        MainWindow->resize(527, 358);
+        MainWindow->resize(613, 356);
         actionNew = new QAction(MainWindow);
         actionNew->setObjectName(QString::fromUtf8("actionNew"));
         QIcon icon;
@@ -202,7 +202,7 @@ public:
         MainWindow->setCentralWidget(centralwidget);
         menubar = new QMenuBar(MainWindow);
         menubar->setObjectName(QString::fromUtf8("menubar"));
-        menubar->setGeometry(QRect(0, 0, 527, 21));
+        menubar->setGeometry(QRect(0, 0, 613, 21));
         menu = new QMenu(menubar);
         menu->setObjectName(QString::fromUtf8("menu"));
         menu_E = new QMenu(menubar);
@@ -236,11 +236,21 @@ public:
         menu_E->addAction(actionCut);
         menu_E->addAction(actionCopy);
         menu_E->addAction(actionPaste);
-        menu_O->addAction(actionFont);
-        menu_O->addAction(actionLineNumber);
+        menu_E->addSeparator();
+        menu_E->addAction(actionFind);
+        menu_E->addAction(actionReplace);
+        menu_E->addSeparator();
+        menu_E->addAction(actionSelectAll);
         menu_O->addAction(actionWrap);
+        menu_O->addAction(actionLineNumber);
+        menu_O->addAction(actionFont);
+        menu_O->addAction(actionTextColor);
+        menu_O->addSeparator();
+        menu_O->addAction(actionTextBackgroundColor);
+        menu_O->addAction(actionEditorBackgroundColor);
         menu_V->addAction(actionToolbar);
         menu_V->addAction(actionStatusbar);
+        menu_H->addAction(actionAbout);
         toolBar->addAction(actionNew);
         toolBar->addAction(actionOpen);
         toolBar->addAction(actionSave);
@@ -259,6 +269,8 @@ public:
         toolBar->addAction(actionLineNumber);
         toolBar->addAction(actionWrap);
         toolBar->addSeparator();
+        toolBar->addAction(actionToolbar);
+        toolBar->addAction(actionStatusbar);
 
         retranslateUi(MainWindow);
 
