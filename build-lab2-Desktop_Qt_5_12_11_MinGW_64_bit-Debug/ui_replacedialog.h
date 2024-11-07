@@ -56,7 +56,7 @@ public:
         if (ReplaceDialog->objectName().isEmpty())
             ReplaceDialog->setObjectName(QString::fromUtf8("ReplaceDialog"));
         ReplaceDialog->resize(425, 176);
-        ReplaceDialog->setMaximumSize(QSize(450, 176));
+        ReplaceDialog->setMaximumSize(QSize(450, 200));
         widget = new QWidget(ReplaceDialog);
         widget->setObjectName(QString::fromUtf8("widget"));
         widget->setGeometry(QRect(270, 10, 151, 151));
