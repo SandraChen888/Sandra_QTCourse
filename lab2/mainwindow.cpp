@@ -14,6 +14,7 @@ MainWindow::MainWindow(QWidget *parent)
     ui->setupUi(this);
 
     textChanged = false;
+    on_actionNew_triggered();
 
     statusLable.setMaximumWidth(150);
     statusLable.setText("length:" + QString::number(0) +"   lines:" + QString::number(1));
@@ -57,6 +58,10 @@ void MainWindow::on_actionReplace_triggered()
 
 void MainWindow::on_actionNew_triggered()
 {
+    if(!userEditConfirmed())
+        return;
+
+    filePath = "";
     ui->TextEdit->clear();
     this->setWindowTitle(tr("新建文本文件—编辑器"));
     textChanged = false;
@@ -90,10 +95,7 @@ void MainWindow::on_actionOpen_triggered()
 
 void MainWindow::on_actionSave_triggered()
 {
-    QFile file(filePath);
-
-    if(!file.open(QFile::WriteOnly | QFile::Text)){
-        QMessageBox::warning(this,"..","打开文件失败");
+    if(filePath == ""){
         QString filename = QFileDialog::getSaveFileName(this,"保存文件",".",tr("Text files (*.txt)"));
 
         QFile file(filename);
@@ -103,6 +105,12 @@ void MainWindow::on_actionSave_triggered()
             return;
         }
         filePath = filename;
+    }
+
+    QFile file(filePath);
+    if(!file.open(QFile::WriteOnly | QFile::Text)){
+        QMessageBox::warning(this,"..","保存文件失败");
+        return;
     }
 
     QTextStream out(&file);
@@ -153,7 +161,7 @@ bool MainWindow::userEditConfirmed()
 
         QMessageBox msg(this);
         msg.setIcon(QMessageBox::Question);
-        msg.setWindowTitle("...///vgb                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                ");
+        msg.setWindowTitle("...///vgb;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               ");
         msg.setWindowFlag(Qt::Drawer);
         msg.setText(QString("是否将更改保存到\n")+ "\""+ path +"\"?");
         msg.setStandardButtons(QMessageBox::Yes|QMessageBox::No|QMessageBox::Cancel);
@@ -171,5 +179,35 @@ bool MainWindow::userEditConfirmed()
     }
 
     return true;
+}
+
+
+void MainWindow::on_actionUndo_triggered()
+{
+    ui->TextEdit->undo();
+}
+
+
+void MainWindow::on_actionRedo_triggered()
+{
+    ui->TextEdit->redo();
+}
+
+
+void MainWindow::on_actionCut_triggered()
+{
+    ui->TextEdit->cut();
+}
+
+
+void MainWindow::on_actionCopy_triggered()
+{
+    ui->TextEdit->copy();
+}
+
+
+void MainWindow::on_actionPaste_triggered()
+{
+    ui->TextEdit->paste();
 }
 
