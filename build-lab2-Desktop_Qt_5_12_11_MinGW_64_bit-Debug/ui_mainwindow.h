@@ -231,6 +231,8 @@ public:
         menu->addAction(actionSave);
         menu->addAction(actionSaveAs);
         menu->addSeparator();
+        menu->addSeparator();
+        menu->addAction(actionExit);
         menu_E->addAction(actionUndo);
         menu_E->addAction(actionRedo);
         menu_E->addAction(actionCut);

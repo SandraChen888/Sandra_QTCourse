@@ -6,6 +6,8 @@
 #include <QFileDialog>
 #include <QMessageBox>
 #include <QTextStream>
+#include <QColorDialog>
+#include <QFontDialog>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -27,6 +29,19 @@ MainWindow::MainWindow(QWidget *parent)
     QLabel *author = new QLabel(ui->statusbar);
     author->setText(tr("陈佩瑶"));
     ui->statusbar->addPermanentWidget(author);
+
+    QPlainTextEdit::LineWrapMode mode = ui->TextEdit->lineWrapMode();
+
+    if(mode == QPlainTextEdit::NoWrap){
+        ui->TextEdit->setLineWrapMode(QPlainTextEdit::WidgetWidth);
+        ui->actionWrap->setChecked(false);
+    }else{
+        ui->TextEdit->setLineWrapMode(QPlainTextEdit::NoWrap);
+        ui->actionWrap->setChecked(true);
+    }
+
+    ui->actionStatusbar->setChecked(true);
+    ui->actionToolbar->setChecked(true);
 }
 
 MainWindow::~MainWindow()
@@ -209,5 +224,83 @@ void MainWindow::on_actionCopy_triggered()
 void MainWindow::on_actionPaste_triggered()
 {
     ui->TextEdit->paste();
+}
+
+
+void MainWindow::on_actionTextColor_triggered()
+{
+    QColor color = QColorDialog::getColor(Qt::black,this,"选择颜色");
+    if(color.isValid()){
+        ui->TextEdit->setStyleSheet(QString("QPlainTextEdit {color:%1}").arg(color.name()));
+    }
+}
+
+
+void MainWindow::on_actionEditorBackgroundColor_triggered()
+{
+    QColor color = QColorDialog::getColor(Qt::black,this,"选择颜色");
+    if(color.isValid()){
+        ui->TextEdit->setStyleSheet(QString("QPlainTextEdit {background-color:%1}").arg(color.name()));
+    }
+}
+
+
+void MainWindow::on_actionTextBackgroundColor_triggered()
+{
+
+}
+
+
+void MainWindow::on_actionWrap_triggered()
+{
+    QPlainTextEdit::LineWrapMode mode = ui->TextEdit->lineWrapMode();
+
+    if(mode == QPlainTextEdit::NoWrap){
+        ui->TextEdit->setLineWrapMode(QPlainTextEdit::WidgetWidth);
+        ui->actionWrap->setChecked(true);
+    }else{
+        ui->TextEdit->setLineWrapMode(QPlainTextEdit::NoWrap);
+        ui->actionWrap->setChecked(false);
+    }
+}
+
+
+void MainWindow::on_actionFont_triggered()
+{
+    bool ok=false;
+    QFont font = QFontDialog::getFont(&ok,this);
+
+    if(ok){
+        ui->TextEdit->setFont(font);
+    }
+}
+
+
+void MainWindow::on_actionToolbar_triggered()
+{
+    bool visible = ui->toolBar->isVisible();
+    ui->toolBar->setVisible(!visible);
+    ui->actionToolbar->setChecked(!visible);
+}
+
+
+void MainWindow::on_actionStatusbar_triggered()
+{
+    bool visible = ui->statusbar->isVisible();
+    ui->statusbar->setVisible(!visible);
+    ui->actionStatusbar->setChecked(!visible);
+}
+
+
+void MainWindow::on_actionSelectAll_triggered()
+{
+    ui->TextEdit->selectAll();
+}
+
+
+void MainWindow::on_actionExit_triggered()
+{
+    if(userEditConfirmed())
+        exit(0);
 }
 

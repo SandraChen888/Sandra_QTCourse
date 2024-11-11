@@ -43,6 +43,24 @@ private slots:
 
     void on_actionPaste_triggered();
 
+    void on_actionTextColor_triggered();
+
+    void on_actionEditorBackgroundColor_triggered();
+
+    void on_actionTextBackgroundColor_triggered();
+
+    void on_actionWrap_triggered();
+
+    void on_actionFont_triggered();
+
+    void on_actionToolbar_triggered();
+
+    void on_actionStatusbar_triggered();
+
+    void on_actionSelectAll_triggered();
+
+    void on_actionExit_triggered();
+
 private:
     Ui::MainWindow *ui;
 
