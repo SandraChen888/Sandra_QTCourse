@@ -19,11 +19,11 @@ MainWindow::MainWindow(QWidget *parent)
     on_actionNew_triggered();
 
     statusLable.setMaximumWidth(150);
-    statusLable.setText("length:" + QString::number(0) +"   lines:" + QString::number(1));
+    statusLable.setText("length:" + QString::number(0) + "   lines:" + QString::number(1));
     ui->statusbar->addPermanentWidget(&statusLable);
 
     statusCursorLabel.setMaximumWidth(150);
-    statusCursorLabel.setText("Ln:" + QString::number(0) +"   Col:" + QString::number(1));
+    statusCursorLabel.setText("Ln:" + QString::number(0) + "   Col:" + QString::number(1));
     ui->statusbar->addPermanentWidget(&statusCursorLabel);
 
     QLabel *author = new QLabel(ui->statusbar);
@@ -32,16 +32,22 @@ MainWindow::MainWindow(QWidget *parent)
 
     QPlainTextEdit::LineWrapMode mode = ui->TextEdit->lineWrapMode();
 
-    if(mode == QPlainTextEdit::NoWrap){
+    if (mode == QPlainTextEdit::NoWrap) {
         ui->TextEdit->setLineWrapMode(QPlainTextEdit::WidgetWidth);
         ui->actionWrap->setChecked(false);
-    }else{
+    } else {
         ui->TextEdit->setLineWrapMode(QPlainTextEdit::NoWrap);
         ui->actionWrap->setChecked(true);
     }
 
     ui->actionStatusbar->setChecked(true);
     ui->actionToolbar->setChecked(true);
+
+    ui->actionCopy->setEnabled(false);
+    ui->actionPaste->setEnabled(false);
+    ui->actionCut->setEnabled(false);
+    ui->actionUndo->setEnabled(false);
+    ui->actionRedo->setEnabled(false);
 }
 
 MainWindow::~MainWindow()
@@ -73,7 +79,7 @@ void MainWindow::on_actionReplace_triggered()
 
 void MainWindow::on_actionNew_triggered()
 {
-    if(!userEditConfirmed())
+    if (!userEditConfirmed())
         return;
 
     filePath = "";
@@ -85,13 +91,13 @@ void MainWindow::on_actionNew_triggered()
 
 void MainWindow::on_actionOpen_triggered()
 {
-    if(!userEditConfirmed())
+    if (!userEditConfirmed())
         return;
-    QString filename = QFileDialog::getOpenFileName(this,"打开文件",".",tr("Text files (*.txt);;All(*.*)"));
+    QString filename = QFileDialog::getOpenFileName(this, "打开文件", ".", tr("Text files (*.txt);;All(*.*)"));
     QFile file(filename);
 
-    if(!file.open(QFile::ReadOnly | QFile::Text)){
-        QMessageBox::warning(this,"..","打开文件失败");
+    if (!file.open(QFile::ReadOnly | QFile::Text)) {
+        QMessageBox::warning(this, "..", "打开文件失败");
         return;
     }
 
@@ -110,27 +116,27 @@ void MainWindow::on_actionOpen_triggered()
 
 void MainWindow::on_actionSave_triggered()
 {
-    if(filePath == ""){
-        QString filename = QFileDialog::getSaveFileName(this,"保存文件",".",tr("Text files (*.txt)"));
+    if (filePath == "") {
+        QString filename = QFileDialog::getSaveFileName(this, "保存文件", ".", tr("Text files (*.txt)"));
 
         QFile file(filename);
 
-        if(!file.open(QFile::WriteOnly | QFile::Text)){
-            QMessageBox::warning(this,"..","保存文件失败");
+        if (!file.open(QFile::WriteOnly | QFile::Text)) {
+            QMessageBox::warning(this, "..", "保存文件失败");
             return;
         }
         filePath = filename;
     }
 
     QFile file(filePath);
-    if(!file.open(QFile::WriteOnly | QFile::Text)){
-        QMessageBox::warning(this,"..","保存文件失败");
+    if (!file.open(QFile::WriteOnly | QFile::Text)) {
+        QMessageBox::warning(this, "..", "保存文件失败");
         return;
     }
 
     QTextStream out(&file);
     QString text = ui->TextEdit->toPlainText();
-    out<<text;
+    out << text;
     file.flush();
     file.close();
 
@@ -140,19 +146,19 @@ void MainWindow::on_actionSave_triggered()
 
 void MainWindow::on_actionSaveAs_triggered()
 {
-    QString filename = QFileDialog::getSaveFileName(this,"保存文件",".",tr("Text files (*.txt)"));
+    QString filename = QFileDialog::getSaveFileName(this, "保存文件", ".", tr("Text files (*.txt)"));
 
     QFile file(filename);
 
-    if(!file.open(QFile::WriteOnly | QFile::Text)){
-        QMessageBox::warning(this,"..","保存文件失败");
+    if (!file.open(QFile::WriteOnly | QFile::Text)) {
+        QMessageBox::warning(this, "..", "保存文件失败");
         return;
     }
 
     filePath = filename;
     QTextStream out(&file);
     QString text = ui->TextEdit->toPlainText();
-    out<<text;
+    out << text;
     file.flush();
     file.close();
 
@@ -162,7 +168,7 @@ void MainWindow::on_actionSaveAs_triggered()
 
 void MainWindow::on_TextEdit_textChanged()
 {
-    if(!textChanged){
+    if (!textChanged) {
         this->setWindowTitle("*" + this->windowTitle());
         textChanged = true;
     }
@@ -170,17 +176,17 @@ void MainWindow::on_TextEdit_textChanged()
 
 bool MainWindow::userEditConfirmed()
 {
-    if(textChanged){
+    if (textChanged) {
 
-        QString path = (filePath !="") ? filePath : "无标题.txt";
+        QString path = (filePath != "") ? filePath : "无标题.txt";
 
         QMessageBox msg(this);
         msg.setIcon(QMessageBox::Question);
         msg.setWindowTitle("...///vgb;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               ");
         msg.setWindowFlag(Qt::Drawer);
-        msg.setText(QString("是否将更改保存到\n")+ "\""+ path +"\"?");
-        msg.setStandardButtons(QMessageBox::Yes|QMessageBox::No|QMessageBox::Cancel);
-        int r =msg.exec();
+        msg.setText(QString("是否将更改保存到\n") + "\"" + path + "\"?");
+        msg.setStandardButtons(QMessageBox::Yes | QMessageBox::No | QMessageBox::Cancel);
+        int r = msg.exec();
         switch (r) {
         case QMessageBox::Yes:
             on_actionSave_triggered();
@@ -212,12 +218,14 @@ void MainWindow::on_actionRedo_triggered()
 void MainWindow::on_actionCut_triggered()
 {
     ui->TextEdit->cut();
+    ui->actionPaste->setEnabled(true);
 }
 
 
 void MainWindow::on_actionCopy_triggered()
 {
     ui->TextEdit->copy();
+    ui->actionPaste->setEnabled(true);
 }
 
 
@@ -229,8 +237,8 @@ void MainWindow::on_actionPaste_triggered()
 
 void MainWindow::on_actionTextColor_triggered()
 {
-    QColor color = QColorDialog::getColor(Qt::black,this,"选择颜色");
-    if(color.isValid()){
+    QColor color = QColorDialog::getColor(Qt::black, this, "选择颜色");
+    if (color.isValid()) {
         ui->TextEdit->setStyleSheet(QString("QPlainTextEdit {color:%1}").arg(color.name()));
     }
 }
@@ -238,8 +246,8 @@ void MainWindow::on_actionTextColor_triggered()
 
 void MainWindow::on_actionEditorBackgroundColor_triggered()
 {
-    QColor color = QColorDialog::getColor(Qt::black,this,"选择颜色");
-    if(color.isValid()){
+    QColor color = QColorDialog::getColor(Qt::black, this, "选择颜色");
+    if (color.isValid()) {
         ui->TextEdit->setStyleSheet(QString("QPlainTextEdit {background-color:%1}").arg(color.name()));
     }
 }
@@ -255,10 +263,10 @@ void MainWindow::on_actionWrap_triggered()
 {
     QPlainTextEdit::LineWrapMode mode = ui->TextEdit->lineWrapMode();
 
-    if(mode == QPlainTextEdit::NoWrap){
+    if (mode == QPlainTextEdit::NoWrap) {
         ui->TextEdit->setLineWrapMode(QPlainTextEdit::WidgetWidth);
         ui->actionWrap->setChecked(true);
-    }else{
+    } else {
         ui->TextEdit->setLineWrapMode(QPlainTextEdit::NoWrap);
         ui->actionWrap->setChecked(false);
     }
@@ -267,10 +275,10 @@ void MainWindow::on_actionWrap_triggered()
 
 void MainWindow::on_actionFont_triggered()
 {
-    bool ok=false;
-    QFont font = QFontDialog::getFont(&ok,this);
+    bool ok = false;
+    QFont font = QFontDialog::getFont(&ok, this);
 
-    if(ok){
+    if (ok) {
         ui->TextEdit->setFont(font);
     }
 }
@@ -300,7 +308,27 @@ void MainWindow::on_actionSelectAll_triggered()
 
 void MainWindow::on_actionExit_triggered()
 {
-    if(userEditConfirmed())
+    if (userEditConfirmed())
         exit(0);
+}
+
+
+void MainWindow::on_TextEdit_copyAvailable(bool b)
+{
+    ui->actionCopy->setEnabled(b);
+    ui->actionCut->setEnabled(b);
+}
+
+
+void MainWindow::on_TextEdit_redoAvailable(bool b)
+{
+    ui->actionRedo->setEnabled(b);
+}
+
+
+void MainWindow::on_TextEdit_undoAvailable(bool b)
+{
+    ui->actionUndo->setEnabled(b);
+
 }
 

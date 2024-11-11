@@ -61,6 +61,12 @@ private slots:
 
     void on_actionExit_triggered();
 
+    void on_TextEdit_copyAvailable(bool b);
+
+    void on_TextEdit_redoAvailable(bool b);
+
+    void on_TextEdit_undoAvailable(bool b);
+
 private:
     Ui::MainWindow *ui;
 
