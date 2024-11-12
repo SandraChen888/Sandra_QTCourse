@@ -67,6 +67,8 @@ private slots:
 
     void on_TextEdit_undoAvailable(bool b);
 
+    void on_TextEdit_cursorPositionChanged();
+
 private:
     Ui::MainWindow *ui;
 

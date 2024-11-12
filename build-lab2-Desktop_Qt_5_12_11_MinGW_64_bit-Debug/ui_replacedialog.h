@@ -27,7 +27,7 @@ QT_BEGIN_NAMESPACE
 class Ui_ReplaceDialog
 {
 public:
-    QWidget *widget;
+    QWidget *layoutWidget;
     QVBoxLayout *verticalLayout_3;
     QPushButton *btFindNext;
     QSpacerItem *verticalSpacer_2;
@@ -36,14 +36,14 @@ public:
     QPushButton *btReplaceAll;
     QSpacerItem *verticalSpacer_3;
     QPushButton *btCancel;
-    QWidget *widget1;
+    QWidget *layoutWidget1;
     QVBoxLayout *verticalLayout_2;
     QHBoxLayout *horizontalLayout_3;
     QLabel *label;
     QLineEdit *SearshText;
     QHBoxLayout *horizontalLayout;
     QLabel *label_3;
-    QLineEdit *lineEdit;
+    QLineEdit *targeText;
     QVBoxLayout *verticalLayout;
     QLabel *label_2;
     QHBoxLayout *horizontalLayout_2;
@@ -57,13 +57,13 @@ public:
             ReplaceDialog->setObjectName(QString::fromUtf8("ReplaceDialog"));
         ReplaceDialog->resize(425, 176);
         ReplaceDialog->setMaximumSize(QSize(450, 200));
-        widget = new QWidget(ReplaceDialog);
-        widget->setObjectName(QString::fromUtf8("widget"));
-        widget->setGeometry(QRect(270, 10, 151, 151));
-        verticalLayout_3 = new QVBoxLayout(widget);
+        layoutWidget = new QWidget(ReplaceDialog);
+        layoutWidget->setObjectName(QString::fromUtf8("layoutWidget"));
+        layoutWidget->setGeometry(QRect(270, 10, 151, 151));
+        verticalLayout_3 = new QVBoxLayout(layoutWidget);
         verticalLayout_3->setObjectName(QString::fromUtf8("verticalLayout_3"));
         verticalLayout_3->setContentsMargins(0, 0, 0, 0);
-        btFindNext = new QPushButton(widget);
+        btFindNext = new QPushButton(layoutWidget);
         btFindNext->setObjectName(QString::fromUtf8("btFindNext"));
 
         verticalLayout_3->addWidget(btFindNext);
@@ -72,7 +72,7 @@ public:
 
         verticalLayout_3->addItem(verticalSpacer_2);
 
-        btReplace = new QPushButton(widget);
+        btReplace = new QPushButton(layoutWidget);
         btReplace->setObjectName(QString::fromUtf8("btReplace"));
 
         verticalLayout_3->addWidget(btReplace);
@@ -81,7 +81,7 @@ public:
 
         verticalLayout_3->addItem(verticalSpacer);
 
-        btReplaceAll = new QPushButton(widget);
+        btReplaceAll = new QPushButton(layoutWidget);
         btReplaceAll->setObjectName(QString::fromUtf8("btReplaceAll"));
 
         verticalLayout_3->addWidget(btReplaceAll);
@@ -90,20 +90,20 @@ public:
 
         verticalLayout_3->addItem(verticalSpacer_3);
 
-        btCancel = new QPushButton(widget);
+        btCancel = new QPushButton(layoutWidget);
         btCancel->setObjectName(QString::fromUtf8("btCancel"));
 
         verticalLayout_3->addWidget(btCancel);
 
-        widget1 = new QWidget(ReplaceDialog);
-        widget1->setObjectName(QString::fromUtf8("widget1"));
-        widget1->setGeometry(QRect(1, 13, 241, 151));
-        verticalLayout_2 = new QVBoxLayout(widget1);
+        layoutWidget1 = new QWidget(ReplaceDialog);
+        layoutWidget1->setObjectName(QString::fromUtf8("layoutWidget1"));
+        layoutWidget1->setGeometry(QRect(1, 13, 241, 151));
+        verticalLayout_2 = new QVBoxLayout(layoutWidget1);
         verticalLayout_2->setObjectName(QString::fromUtf8("verticalLayout_2"));
         verticalLayout_2->setContentsMargins(0, 0, 0, 0);
         horizontalLayout_3 = new QHBoxLayout();
         horizontalLayout_3->setObjectName(QString::fromUtf8("horizontalLayout_3"));
-        label = new QLabel(widget1);
+        label = new QLabel(layoutWidget1);
         label->setObjectName(QString::fromUtf8("label"));
         QSizePolicy sizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
         sizePolicy.setHorizontalStretch(0);
@@ -118,7 +118,7 @@ public:
 
         horizontalLayout_3->addWidget(label);
 
-        SearshText = new QLineEdit(widget1);
+        SearshText = new QLineEdit(layoutWidget1);
         SearshText->setObjectName(QString::fromUtf8("SearshText"));
 
         horizontalLayout_3->addWidget(SearshText);
@@ -128,7 +128,7 @@ public:
 
         horizontalLayout = new QHBoxLayout();
         horizontalLayout->setObjectName(QString::fromUtf8("horizontalLayout"));
-        label_3 = new QLabel(widget1);
+        label_3 = new QLabel(layoutWidget1);
         label_3->setObjectName(QString::fromUtf8("label_3"));
         sizePolicy.setHeightForWidth(label_3->sizePolicy().hasHeightForWidth());
         label_3->setSizePolicy(sizePolicy);
@@ -137,29 +137,29 @@ public:
 
         horizontalLayout->addWidget(label_3);
 
-        lineEdit = new QLineEdit(widget1);
-        lineEdit->setObjectName(QString::fromUtf8("lineEdit"));
+        targeText = new QLineEdit(layoutWidget1);
+        targeText->setObjectName(QString::fromUtf8("targeText"));
 
-        horizontalLayout->addWidget(lineEdit);
+        horizontalLayout->addWidget(targeText);
 
 
         verticalLayout_2->addLayout(horizontalLayout);
 
         verticalLayout = new QVBoxLayout();
         verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
-        label_2 = new QLabel(widget1);
+        label_2 = new QLabel(layoutWidget1);
         label_2->setObjectName(QString::fromUtf8("label_2"));
 
         verticalLayout->addWidget(label_2);
 
         horizontalLayout_2 = new QHBoxLayout();
         horizontalLayout_2->setObjectName(QString::fromUtf8("horizontalLayout_2"));
-        rbUp = new QRadioButton(widget1);
+        rbUp = new QRadioButton(layoutWidget1);
         rbUp->setObjectName(QString::fromUtf8("rbUp"));
 
         horizontalLayout_2->addWidget(rbUp);
 
-        rbDown = new QRadioButton(widget1);
+        rbDown = new QRadioButton(layoutWidget1);
         rbDown->setObjectName(QString::fromUtf8("rbDown"));
 
         horizontalLayout_2->addWidget(rbDown);
@@ -170,7 +170,7 @@ public:
 
         verticalLayout_2->addLayout(verticalLayout);
 
-        cbCase = new QCheckBox(widget1);
+        cbCase = new QCheckBox(layoutWidget1);
         cbCase->setObjectName(QString::fromUtf8("cbCase"));
 
         verticalLayout_2->addWidget(cbCase);

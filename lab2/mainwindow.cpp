@@ -18,7 +18,7 @@ MainWindow::MainWindow(QWidget *parent)
     textChanged = false;
     on_actionNew_triggered();
 
-    statusLable.setMaximumWidth(150);
+    statusLable.setMaximumWidth(200);
     statusLable.setText("length:" + QString::number(0) + "   lines:" + QString::number(1));
     ui->statusbar->addPermanentWidget(&statusLable);
 
@@ -65,14 +65,14 @@ void MainWindow::on_actionAbout_triggered()
 
 void MainWindow::on_actionFind_triggered()
 {
-    SearshDialog dlg;
+    SearshDialog dlg(this, ui->TextEdit);
     dlg.exec();
 }
 
 
 void MainWindow::on_actionReplace_triggered()
 {
-    ReplaceDialog dlg;
+    ReplaceDialog dlg(this, ui->TextEdit);
     dlg.exec();
 }
 
@@ -172,6 +172,9 @@ void MainWindow::on_TextEdit_textChanged()
         this->setWindowTitle("*" + this->windowTitle());
         textChanged = true;
     }
+
+    statusLable.setText("length: " + QString::number(ui->TextEdit->toPlainText().length()) + "     lines: " +
+                        QString::number(ui->TextEdit->document()->lineCount()));
 }
 
 bool MainWindow::userEditConfirmed()
@@ -330,5 +333,25 @@ void MainWindow::on_TextEdit_undoAvailable(bool b)
 {
     ui->actionUndo->setEnabled(b);
 
+}
+
+
+void MainWindow::on_TextEdit_cursorPositionChanged()
+{
+    int col = 0;
+    int ln = 0;
+    int flg = -1;
+    int pos = ui->TextEdit->textCursor().position();
+    QString text = ui->TextEdit->toPlainText();
+
+    for (int i = 0; i < pos ; i++) {
+        if (text[i] == "\n") {
+            ln ++;
+            flg = i;
+        }
+    }
+    flg ++;
+    col = pos - flg;
+    statusCursorLabel.setText("Ln: "+QString::number(ln+1)+"    Col: "+QString::number(col+1));
 }
 
