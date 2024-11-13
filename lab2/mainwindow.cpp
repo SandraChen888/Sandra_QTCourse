@@ -42,12 +42,16 @@ MainWindow::MainWindow(QWidget *parent)
 
     ui->actionStatusbar->setChecked(true);
     ui->actionToolbar->setChecked(true);
+    ui->actionLineNumber->setChecked(false);
 
     ui->actionCopy->setEnabled(false);
     ui->actionPaste->setEnabled(false);
     ui->actionCut->setEnabled(false);
     ui->actionUndo->setEnabled(false);
     ui->actionRedo->setEnabled(false);
+//    on_actionLineNumber_triggered(false);
+
+    connect(ui->actionLineNumber,SIGNAL(triggered(bool)),ui->TextEdit,SLOT(hideLineNumberArea(bool)));
 }
 
 MainWindow::~MainWindow()
@@ -354,4 +358,9 @@ void MainWindow::on_TextEdit_cursorPositionChanged()
     col = pos - flg;
     statusCursorLabel.setText("Ln: "+QString::number(ln+1)+"    Col: "+QString::number(col+1));
 }
+
+//void MainWindow::on_actionLineNumber_triggered(bool checked)
+//{
+//    ui->TextEdit->hideLineNumberArea(!checked);
+//}
 

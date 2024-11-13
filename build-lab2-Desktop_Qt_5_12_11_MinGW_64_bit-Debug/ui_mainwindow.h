@@ -15,11 +15,11 @@
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QMenu>
 #include <QtWidgets/QMenuBar>
-#include <QtWidgets/QPlainTextEdit>
 #include <QtWidgets/QStatusBar>
 #include <QtWidgets/QToolBar>
 #include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
+#include <codeeditor.h>
 
 QT_BEGIN_NAMESPACE
 
@@ -50,7 +50,7 @@ public:
     QAction *actionTextBackgroundColor;
     QWidget *centralwidget;
     QVBoxLayout *verticalLayout;
-    QPlainTextEdit *TextEdit;
+    CodeEditor *TextEdit;
     QMenuBar *menubar;
     QMenu *menu;
     QMenu *menu_E;
@@ -160,6 +160,7 @@ public:
         actionAbout->setIcon(icon17);
         actionLineNumber = new QAction(MainWindow);
         actionLineNumber->setObjectName(QString::fromUtf8("actionLineNumber"));
+        actionLineNumber->setCheckable(true);
         QIcon icon18;
         icon18.addFile(QString::fromUtf8(":/img/format_list_numbered_24dp_5F6368_FILL0_wght400_GRAD0_opsz24.png"), QSize(), QIcon::Normal, QIcon::Off);
         actionLineNumber->setIcon(icon18);
@@ -194,7 +195,7 @@ public:
         verticalLayout->setSpacing(0);
         verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
         verticalLayout->setContentsMargins(1, 1, 1, 1);
-        TextEdit = new QPlainTextEdit(centralwidget);
+        TextEdit = new CodeEditor(centralwidget);
         TextEdit->setObjectName(QString::fromUtf8("TextEdit"));
 
         verticalLayout->addWidget(TextEdit);
