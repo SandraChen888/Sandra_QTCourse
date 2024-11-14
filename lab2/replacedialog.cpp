@@ -74,8 +74,16 @@ void ReplaceDialog::on_btReplace_clicked()
 
 void ReplaceDialog::on_btReplaceAll_clicked()
 {
-//    QString target = ui->SearshText->text();
-//    QString to = ui->targeText->text();
+    QString target =ui->SearshText->text();
+    QString to = ui->targeText->text();
+
+    if((pTextEdit!=nullptr)&&(target!="")&&(to!="")){
+        QString text = pTextEdit->toPlainText();
+
+        text.replace(target,to,ui->cbCase->isChecked()?Qt::CaseSensitive:Qt::CaseInsensitive);
+        pTextEdit->clear();
+        pTextEdit->insertPlainText(text);
+    }
 }
 
 
