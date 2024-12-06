@@ -24,15 +24,13 @@ class Ui_MasterVew
 {
 public:
     QStackedWidget *stackedWidget;
-    QWidget *page;
-    QWidget *page_2;
     QWidget *widget;
     QHBoxLayout *horizontalLayout;
-    QPushButton *pushButton;
+    QPushButton *btnback;
     QSpacerItem *horizontalSpacer;
-    QLabel *label;
+    QLabel *labelTitle;
     QSpacerItem *horizontalSpacer_2;
-    QPushButton *pushButton_2;
+    QPushButton *btnLogout;
 
     void setupUi(QWidget *MasterVew)
     {
@@ -42,40 +40,34 @@ public:
         stackedWidget = new QStackedWidget(MasterVew);
         stackedWidget->setObjectName(QString::fromUtf8("stackedWidget"));
         stackedWidget->setGeometry(QRect(10, 50, 541, 221));
-        page = new QWidget();
-        page->setObjectName(QString::fromUtf8("page"));
-        stackedWidget->addWidget(page);
-        page_2 = new QWidget();
-        page_2->setObjectName(QString::fromUtf8("page_2"));
-        stackedWidget->addWidget(page_2);
         widget = new QWidget(MasterVew);
         widget->setObjectName(QString::fromUtf8("widget"));
         widget->setGeometry(QRect(10, 10, 541, 22));
         horizontalLayout = new QHBoxLayout(widget);
         horizontalLayout->setObjectName(QString::fromUtf8("horizontalLayout"));
         horizontalLayout->setContentsMargins(0, 0, 0, 0);
-        pushButton = new QPushButton(widget);
-        pushButton->setObjectName(QString::fromUtf8("pushButton"));
+        btnback = new QPushButton(widget);
+        btnback->setObjectName(QString::fromUtf8("btnback"));
 
-        horizontalLayout->addWidget(pushButton);
+        horizontalLayout->addWidget(btnback);
 
         horizontalSpacer = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
 
         horizontalLayout->addItem(horizontalSpacer);
 
-        label = new QLabel(widget);
-        label->setObjectName(QString::fromUtf8("label"));
+        labelTitle = new QLabel(widget);
+        labelTitle->setObjectName(QString::fromUtf8("labelTitle"));
 
-        horizontalLayout->addWidget(label);
+        horizontalLayout->addWidget(labelTitle);
 
         horizontalSpacer_2 = new QSpacerItem(29, 17, QSizePolicy::Expanding, QSizePolicy::Minimum);
 
         horizontalLayout->addItem(horizontalSpacer_2);
 
-        pushButton_2 = new QPushButton(widget);
-        pushButton_2->setObjectName(QString::fromUtf8("pushButton_2"));
+        btnLogout = new QPushButton(widget);
+        btnLogout->setObjectName(QString::fromUtf8("btnLogout"));
 
-        horizontalLayout->addWidget(pushButton_2);
+        horizontalLayout->addWidget(btnLogout);
 
 
         retranslateUi(MasterVew);
@@ -86,9 +78,9 @@ public:
     void retranslateUi(QWidget *MasterVew)
     {
         MasterVew->setWindowTitle(QApplication::translate("MasterVew", "MasterVew", nullptr));
-        pushButton->setText(QApplication::translate("MasterVew", "PushButton", nullptr));
-        label->setText(QApplication::translate("MasterVew", "TextLabel", nullptr));
-        pushButton_2->setText(QApplication::translate("MasterVew", "PushButton", nullptr));
+        btnback->setText(QApplication::translate("MasterVew", "\350\277\224\345\233\236", nullptr));
+        labelTitle->setText(QApplication::translate("MasterVew", "TextLabel", nullptr));
+        btnLogout->setText(QApplication::translate("MasterVew", "\346\263\250\351\224\200", nullptr));
     } // retranslateUi
 
 };

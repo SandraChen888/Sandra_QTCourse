@@ -13,3 +13,38 @@ MasterVew::~MasterVew()
     delete ui;
 }
 
+void MasterVew::goLoginView()
+{
+
+}
+
+void MasterVew::goWelcomeView()
+{
+
+}
+
+void MasterVew::goDoctorView()
+{
+
+}
+
+void MasterVew::goDepartment()
+{
+
+}
+
+void MasterVew::goPatienEditView()
+{
+
+}
+
+void MasterVew::goPatientView()
+{
+
+}
+
+void MasterVew::goPreviousView()
+{
+
+}
+

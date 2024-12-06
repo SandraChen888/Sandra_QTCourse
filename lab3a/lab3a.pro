@@ -9,17 +9,32 @@ CONFIG += c++11
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    departmentview.cpp \
+    doctorview.cpp \
     loginview.cpp \
     main.cpp \
-    mastervew.cpp
+    mastervew.cpp \
+    patienteditview.cpp \
+    patientview.cpp \
+    welcomeview.cpp
 
 HEADERS += \
+    departmentview.h \
+    doctorview.h \
     loginview.h \
-    mastervew.h
+    mastervew.h \
+    patienteditview.h \
+    patientview.h \
+    welcomeview.h
 
 FORMS += \
+    departmentview.ui \
+    doctorview.ui \
     loginview.ui \
-    mastervew.ui
+    mastervew.ui \
+    patienteditview.ui \
+    patientview.ui \
+    welcomeview.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
