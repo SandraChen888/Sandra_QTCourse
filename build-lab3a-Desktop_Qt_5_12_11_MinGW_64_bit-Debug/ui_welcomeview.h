@@ -13,8 +13,6 @@
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QPushButton>
-#include <QtWidgets/QSpacerItem>
-#include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
 
 QT_BEGIN_NAMESPACE
@@ -23,54 +21,44 @@ class Ui_WelcomeView
 {
 public:
     QWidget *widget;
-    QVBoxLayout *verticalLayout;
-    QSpacerItem *verticalSpacer;
     QHBoxLayout *horizontalLayout;
     QPushButton *btnDepartment;
     QPushButton *btnDoctor;
     QPushButton *btnPatient;
-    QSpacerItem *verticalSpacer_2;
 
     void setupUi(QWidget *WelcomeView)
     {
         if (WelcomeView->objectName().isEmpty())
             WelcomeView->setObjectName(QString::fromUtf8("WelcomeView"));
-        WelcomeView->resize(400, 300);
+        WelcomeView->resize(469, 274);
         widget = new QWidget(WelcomeView);
         widget->setObjectName(QString::fromUtf8("widget"));
-        widget->setGeometry(QRect(30, 0, 361, 311));
-        verticalLayout = new QVBoxLayout(widget);
-        verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
-        verticalLayout->setContentsMargins(0, 0, 0, 0);
-        verticalSpacer = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
-
-        verticalLayout->addItem(verticalSpacer);
-
-        horizontalLayout = new QHBoxLayout();
+        widget->setGeometry(QRect(0, 90, 471, 102));
+        horizontalLayout = new QHBoxLayout(widget);
         horizontalLayout->setObjectName(QString::fromUtf8("horizontalLayout"));
+        horizontalLayout->setContentsMargins(0, 0, 0, 0);
         btnDepartment = new QPushButton(widget);
         btnDepartment->setObjectName(QString::fromUtf8("btnDepartment"));
         btnDepartment->setEnabled(true);
+        btnDepartment->setMinimumSize(QSize(100, 100));
+        btnDepartment->setMaximumSize(QSize(100, 100));
         btnDepartment->setAutoRepeatInterval(100);
 
         horizontalLayout->addWidget(btnDepartment);
 
         btnDoctor = new QPushButton(widget);
         btnDoctor->setObjectName(QString::fromUtf8("btnDoctor"));
+        btnDoctor->setMinimumSize(QSize(100, 100));
+        btnDoctor->setMaximumSize(QSize(100, 100));
 
         horizontalLayout->addWidget(btnDoctor);
 
         btnPatient = new QPushButton(widget);
         btnPatient->setObjectName(QString::fromUtf8("btnPatient"));
+        btnPatient->setMinimumSize(QSize(100, 100));
+        btnPatient->setMaximumSize(QSize(100, 100));
 
         horizontalLayout->addWidget(btnPatient);
-
-
-        verticalLayout->addLayout(horizontalLayout);
-
-        verticalSpacer_2 = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
-
-        verticalLayout->addItem(verticalSpacer_2);
 
 
         retranslateUi(WelcomeView);
