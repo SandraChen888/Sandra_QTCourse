@@ -10,6 +10,7 @@
 #define UI_MASTERVEW_H
 
 #include <QtCore/QVariant>
+#include <QtGui/QIcon>
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QLabel>
@@ -24,7 +25,7 @@ class Ui_MasterVew
 {
 public:
     QStackedWidget *stackedWidget;
-    QWidget *widget;
+    QWidget *layoutWidget;
     QHBoxLayout *horizontalLayout;
     QPushButton *btnback;
     QSpacerItem *horizontalSpacer;
@@ -40,14 +41,17 @@ public:
         stackedWidget = new QStackedWidget(MasterVew);
         stackedWidget->setObjectName(QString::fromUtf8("stackedWidget"));
         stackedWidget->setGeometry(QRect(10, 50, 541, 221));
-        widget = new QWidget(MasterVew);
-        widget->setObjectName(QString::fromUtf8("widget"));
-        widget->setGeometry(QRect(10, 10, 541, 22));
-        horizontalLayout = new QHBoxLayout(widget);
+        layoutWidget = new QWidget(MasterVew);
+        layoutWidget->setObjectName(QString::fromUtf8("layoutWidget"));
+        layoutWidget->setGeometry(QRect(10, 10, 541, 26));
+        horizontalLayout = new QHBoxLayout(layoutWidget);
         horizontalLayout->setObjectName(QString::fromUtf8("horizontalLayout"));
         horizontalLayout->setContentsMargins(0, 0, 0, 0);
-        btnback = new QPushButton(widget);
+        btnback = new QPushButton(layoutWidget);
         btnback->setObjectName(QString::fromUtf8("btnback"));
+        QIcon icon;
+        icon.addFile(QString::fromUtf8(":/img/circle_left.png"), QSize(), QIcon::Normal, QIcon::Off);
+        btnback->setIcon(icon);
 
         horizontalLayout->addWidget(btnback);
 
@@ -55,7 +59,7 @@ public:
 
         horizontalLayout->addItem(horizontalSpacer);
 
-        labelTitle = new QLabel(widget);
+        labelTitle = new QLabel(layoutWidget);
         labelTitle->setObjectName(QString::fromUtf8("labelTitle"));
 
         horizontalLayout->addWidget(labelTitle);
@@ -64,8 +68,11 @@ public:
 
         horizontalLayout->addItem(horizontalSpacer_2);
 
-        btnLogout = new QPushButton(widget);
+        btnLogout = new QPushButton(layoutWidget);
         btnLogout->setObjectName(QString::fromUtf8("btnLogout"));
+        QIcon icon1;
+        icon1.addFile(QString::fromUtf8(":/img/logout.png"), QSize(), QIcon::Normal, QIcon::Off);
+        btnLogout->setIcon(icon1);
 
         horizontalLayout->addWidget(btnLogout);
 
@@ -78,9 +85,9 @@ public:
     void retranslateUi(QWidget *MasterVew)
     {
         MasterVew->setWindowTitle(QApplication::translate("MasterVew", "MasterVew", nullptr));
-        btnback->setText(QApplication::translate("MasterVew", "\350\277\224\345\233\236", nullptr));
+        btnback->setText(QString());
         labelTitle->setText(QApplication::translate("MasterVew", "TextLabel", nullptr));
-        btnLogout->setText(QApplication::translate("MasterVew", "\346\263\250\351\224\200", nullptr));
+        btnLogout->setText(QString());
     } // retranslateUi
 
 };

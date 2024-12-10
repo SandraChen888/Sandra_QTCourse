@@ -23,20 +23,24 @@
     </rect>
    </property>
   </widget>
-  <widget class="QWidget" name="">
+  <widget class="QWidget" name="layoutWidget">
    <property name="geometry">
     <rect>
      <x>10</x>
      <y>10</y>
      <width>541</width>
-     <height>22</height>
+     <height>26</height>
     </rect>
    </property>
    <layout class="QHBoxLayout" name="horizontalLayout">
     <item>
      <widget class="QPushButton" name="btnback">
       <property name="text">
-       <string>返回</string>
+       <string/>
+      </property>
+      <property name="icon">
+       <iconset resource="lab3a.qrc">
+        <normaloff>:/img/circle_left.png</normaloff>:/img/circle_left.png</iconset>
       </property>
      </widget>
     </item>
@@ -76,13 +80,19 @@
     <item>
      <widget class="QPushButton" name="btnLogout">
       <property name="text">
-       <string>注销</string>
+       <string/>
+      </property>
+      <property name="icon">
+       <iconset resource="lab3a.qrc">
+        <normaloff>:/img/logout.png</normaloff>:/img/logout.png</iconset>
       </property>
      </widget>
     </item>
    </layout>
   </widget>
  </widget>
- <resources/>
+ <resources>
+  <include location="lab3a.qrc"/>
+ </resources>
  <connections/>
 </ui>

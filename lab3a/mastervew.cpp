@@ -8,6 +8,8 @@ MasterVew::MasterVew(QWidget *parent)
 {
     ui->setupUi(this);
 
+    this->setWindowFlag(Qt::FramelessWindowHint);
+
     goLoginView();
 }
 
@@ -90,6 +92,35 @@ void MasterVew::pushWidgetToStackView(QWidget *widget)
 
 
 void MasterVew::on_btnback_clicked()
+{
+    goPreviousView();
+}
+
+
+void MasterVew::on_stackedWidget_currentChanged(int arg1)
+{
+    int count = ui->stackedWidget->count();
+    if(count > 1 ){
+        ui->btnback->setEnabled(true);
+    }
+    else{
+        ui->btnback->setEnabled(false);
+    }
+
+    QString title = ui->stackedWidget->currentWidget()->windowTitle();
+
+    if(title == "欢迎"){
+        ui->btnLogout->setEnabled(true);
+        ui->btnback->setEnabled(false);
+        //ui->btnback->hide();
+    }else{
+        ui->btnLogout->setEnabled(false);
+    }
+
+}
+
+
+void MasterVew::on_btnLogout_clicked()
 {
     goPreviousView();
 }
