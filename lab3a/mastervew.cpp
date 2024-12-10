@@ -1,6 +1,7 @@
 #include "mastervew.h"
 #include "ui_mastervew.h"
 #include <QDebug>
+#include "idatabase.h"
 
 MasterVew::MasterVew(QWidget *parent)
     : QWidget(parent)
@@ -11,6 +12,8 @@ MasterVew::MasterVew(QWidget *parent)
     this->setWindowFlag(Qt::FramelessWindowHint);
 
     goLoginView();
+
+    IDatabase::getInstance();
 }
 
 MasterVew::~MasterVew()
@@ -124,4 +127,3 @@ void MasterVew::on_btnLogout_clicked()
 {
     goPreviousView();
 }
-
