@@ -13,6 +13,26 @@ void IDatabase::ininDatabase()
     }
 }
 
+QString IDatabase::userLogin(QString userName, QString password)
+{
+    //return "loginOK";
+    QSqlQuery query;
+    query.prepare("select USERNAME,PASSWORD from user where USERNAME = :USER");
+    query.bindValue("USER",userName);
+    query.exec();
+    if(query.first() && query.value("username").isValid()){
+        QString passwd = query.value("password").toString();
+        if(passwd == password){
+            return "loginOK";
+        }else{
+            return "wrongPassword";
+        }
+    }else{
+        qDebug()<<"no such user";
+        return"wrongusername";
+    }
+}
+
 IDatabase::IDatabase(QObject *parent) : QObject(parent)
 {
     ininDatabase();
