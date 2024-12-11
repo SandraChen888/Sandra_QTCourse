@@ -25,6 +25,19 @@ void IDatabase::ininDatabase()
         qDebug() << "open database is ok";
 }
 
+bool IDatabase::initPatientModel()
+{
+    patienttabModel = new QSqlTableModel(this,database);
+    patienttabModel->setTable("Patient");
+    patienttabModel->setEditStrategy(QSqlTableModel::OnManualSubmit);//数据保存方式，OnManualSubmit，OnRowChange
+    patienttabModel->setSort(patienttabModel->fieldIndex("name"),Qt::AscendingOrder);//排序
+    if(!(patienttabModel->select()))//查询数据
+        return false;
+
+    thePatientSelection = new QItemSelectionModel(patienttabModel);
+    return true;
+}
+
 //QString IDatabase::userLogin(QString userName, QString password)
 //{
 //    //return "loginOK";

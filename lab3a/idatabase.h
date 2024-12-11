@@ -5,6 +5,7 @@
 #include <QtSql>
 #include <QSqlDatabase>
 #include <QSqlError>
+#include <QDataWidgetMapper>
 
 class IDatabase : public QObject
 {
@@ -31,6 +32,14 @@ private:
     void ininDatabase();
 
 signals:
+
+public:
+    bool initPatientModel();
+
+    QSqlTableModel *patienttabModel;//数据模型
+
+    QItemSelectionModel *thePatientSelection;//选择模型
+
 
 };
 
