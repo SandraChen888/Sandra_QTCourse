@@ -10,7 +10,7 @@ PatientEditView::PatientEditView(QWidget *parent, int index) :
 {
     ui->setupUi(this);
 
-    dataMapper = new QDataWidgetMapper();
+    dataMapper = new QDataWidgetMapper ();
     QSqlTableModel *tabModel = IDatabase::getInstance().patienttabModel;
     dataMapper->setModel(IDatabase::getInstance().patienttabModel);
     dataMapper->setSubmitPolicy(QDataWidgetMapper::AutoSubmit);
@@ -19,8 +19,8 @@ PatientEditView::PatientEditView(QWidget *parent, int index) :
     dataMapper->addMapping(ui->dbEditName, tabModel->fieldIndex("NAME"));
     dataMapper->addMapping(ui->dbEditIDCard, tabModel->fieldIndex("ID_CARD"));
     dataMapper->addMapping(ui->dbSpinHight, tabModel->fieldIndex("HEIGHT"));
-    dataMapper->addMapping(ui->dbSpinWeight, tabModel->fieldIndex("WEIGHT"));
-    dataMapper->addMapping(ui->dbEditMobile, tabModel->fieldIndex("MOBILEPHONE"));
+    dataMapper->addMapping(ui->dbSpinWeight, tabModel->fieldIndex("WEIGHT" ));
+    dataMapper->addMapping(ui->dbEditMobile, tabModel->fieldIndex("MOBILEPHONE") );
     dataMapper->addMapping(ui->dbDataEditDOB, tabModel->fieldIndex("DOB"));
     dataMapper->addMapping(ui->dbComboSex, tabModel->fieldIndex("SEX"));
     dataMapper->addMapping(ui->dbCreatedTimeStamp, tabModel->fieldIndex("CREATEDTIMESTAMP"));
