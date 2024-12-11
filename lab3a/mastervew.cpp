@@ -55,11 +55,13 @@ void MasterVew::goDepartmentView()
     pushWidgetToStackView(departmentView);
 }
 
-void MasterVew::goPatienEditView()
+void MasterVew::goPatienEditView(int rowNo)
 {
     qDebug() << "goLoginView";
-    patientEditView = new PatientEditView(this);
+    patientEditView = new PatientEditView(this, rowNo);
     pushWidgetToStackView(patientEditView);
+
+    connect(patientEditView,SIGNAL(goPreviousView()),this,SLOT(goPreviousView()));
 }
 
 void MasterVew::goPatientView()

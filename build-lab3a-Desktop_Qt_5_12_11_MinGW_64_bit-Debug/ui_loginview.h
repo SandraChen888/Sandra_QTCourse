@@ -49,7 +49,7 @@ public:
     {
         if (LoginView->objectName().isEmpty())
             LoginView->setObjectName(QString::fromUtf8("LoginView"));
-        LoginView->resize(400, 300);
+        LoginView->resize(554, 294);
         verticalLayout = new QVBoxLayout(LoginView);
         verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
         verticalSpacer = new QSpacerItem(20, 51, QSizePolicy::Minimum, QSizePolicy::Expanding);
@@ -91,6 +91,7 @@ public:
 
         inputUserPassword = new QLineEdit(LoginView);
         inputUserPassword->setObjectName(QString::fromUtf8("inputUserPassword"));
+        inputUserPassword->setEchoMode(QLineEdit::Password);
 
         formLayout->setWidget(1, QFormLayout::FieldRole, inputUserPassword);
 

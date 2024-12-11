@@ -37,13 +37,13 @@ public:
     {
         if (MasterVew->objectName().isEmpty())
             MasterVew->setObjectName(QString::fromUtf8("MasterVew"));
-        MasterVew->resize(557, 281);
+        MasterVew->resize(822, 456);
         stackedWidget = new QStackedWidget(MasterVew);
         stackedWidget->setObjectName(QString::fromUtf8("stackedWidget"));
-        stackedWidget->setGeometry(QRect(10, 50, 541, 221));
+        stackedWidget->setGeometry(QRect(10, 50, 801, 391));
         layoutWidget = new QWidget(MasterVew);
         layoutWidget->setObjectName(QString::fromUtf8("layoutWidget"));
-        layoutWidget->setGeometry(QRect(10, 10, 541, 26));
+        layoutWidget->setGeometry(QRect(10, 10, 801, 26));
         horizontalLayout = new QHBoxLayout(layoutWidget);
         horizontalLayout->setObjectName(QString::fromUtf8("horizontalLayout"));
         horizontalLayout->setContentsMargins(0, 0, 0, 0);

@@ -1,6 +1,7 @@
 #include "patientview.h"
 #include "ui_patientview.h"
 #include "idatabase.h"
+#include "mastervew.h"
 
 PatientView::PatientView(QWidget *parent) :
     QWidget(parent),
@@ -27,7 +28,8 @@ PatientView::~PatientView()
 
 void PatientView::on_btnAdd_clicked()
 {
-    emit goPatienEditView();
+    int currow = IDatabase::getInstance().addNewPatient();
+    emit goPatienEditView(currow);
 }
 
 
@@ -46,6 +48,8 @@ void PatientView::on_btnDelete_clicked()
 
 void PatientView::on_btnEdit_clicked()
 {
+    QModelIndex curIndex = IDatabase::getInstance().thePatientSelection->currentIndex();//获取当前选择的单元格的模型索引
 
+    emit goPatienEditView(curIndex.row());
 }
 

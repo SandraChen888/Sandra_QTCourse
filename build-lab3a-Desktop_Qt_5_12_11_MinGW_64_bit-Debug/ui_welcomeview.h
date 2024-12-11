@@ -20,7 +20,7 @@ QT_BEGIN_NAMESPACE
 class Ui_WelcomeView
 {
 public:
-    QWidget *widget;
+    QWidget *layoutWidget;
     QHBoxLayout *horizontalLayout;
     QPushButton *btnDepartment;
     QPushButton *btnDoctor;
@@ -30,14 +30,14 @@ public:
     {
         if (WelcomeView->objectName().isEmpty())
             WelcomeView->setObjectName(QString::fromUtf8("WelcomeView"));
-        WelcomeView->resize(469, 274);
-        widget = new QWidget(WelcomeView);
-        widget->setObjectName(QString::fromUtf8("widget"));
-        widget->setGeometry(QRect(0, 90, 471, 102));
-        horizontalLayout = new QHBoxLayout(widget);
+        WelcomeView->resize(636, 274);
+        layoutWidget = new QWidget(WelcomeView);
+        layoutWidget->setObjectName(QString::fromUtf8("layoutWidget"));
+        layoutWidget->setGeometry(QRect(0, 80, 641, 102));
+        horizontalLayout = new QHBoxLayout(layoutWidget);
         horizontalLayout->setObjectName(QString::fromUtf8("horizontalLayout"));
         horizontalLayout->setContentsMargins(0, 0, 0, 0);
-        btnDepartment = new QPushButton(widget);
+        btnDepartment = new QPushButton(layoutWidget);
         btnDepartment->setObjectName(QString::fromUtf8("btnDepartment"));
         btnDepartment->setEnabled(true);
         btnDepartment->setMinimumSize(QSize(100, 100));
@@ -46,14 +46,14 @@ public:
 
         horizontalLayout->addWidget(btnDepartment);
 
-        btnDoctor = new QPushButton(widget);
+        btnDoctor = new QPushButton(layoutWidget);
         btnDoctor->setObjectName(QString::fromUtf8("btnDoctor"));
         btnDoctor->setMinimumSize(QSize(100, 100));
         btnDoctor->setMaximumSize(QSize(100, 100));
 
         horizontalLayout->addWidget(btnDoctor);
 
-        btnPatient = new QPushButton(widget);
+        btnPatient = new QPushButton(layoutWidget);
         btnPatient->setObjectName(QString::fromUtf8("btnPatient"));
         btnPatient->setMinimumSize(QSize(100, 100));
         btnPatient->setMaximumSize(QSize(100, 100));

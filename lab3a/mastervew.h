@@ -27,7 +27,7 @@ public slots:
     void goWelcomeView();
     void goDoctorView();
     void goDepartmentView();
-    void goPatienEditView();
+    void goPatienEditView(int rowNo);
     void goPatientView();
     void goPreviousView();
 

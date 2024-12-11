@@ -1,4 +1,6 @@
 #include "idatabase.h"
+#include <QDateTime>
+#include <QUuid>
 
 //void IDatabase::ininDatabase()
 //{
@@ -22,7 +24,7 @@ void IDatabase::ininDatabase()
     if (!database.open()) { //打开数据库
         qDebug() << "failed to open database";
     } else
-        qDebug() << "open database is ok";
+        qDebug() << "open database is ok"<<database.connectionName();
 }
 
 bool IDatabase::initPatientModel()
@@ -36,6 +38,21 @@ bool IDatabase::initPatientModel()
 
     thePatientSelection = new QItemSelectionModel(patienttabModel);
     return true;
+}
+
+int IDatabase::addNewPatient()
+{
+    patienttabModel->insertRow(patienttabModel->rowCount(),QModelIndex());//在末尾添加一个记录
+    QModelIndex curIndex = patienttabModel->index(patienttabModel->rowCount() - 1,1);//创建最后一行的ModelIndex
+
+    int curRecNo = curIndex.row();
+    QSqlRecord curRec = patienttabModel->record(curRecNo);
+    curRec.setValue("CREATEDTIMESTAMP",QDateTime::currentDateTime().toString("yyyy-MM-dd"));
+    curRec.setValue("ID",QUuid::createUuid().toString(QUuid::WithoutBraces));
+
+    patienttabModel->setRecord(curRecNo,curRec);
+
+    return curIndex.row();
 }
 
 bool IDatabase::searchPatient(QString filter)
@@ -96,6 +113,7 @@ QString IDatabase::userLogin(QString userName, QString password)
     if (query.first() && query.value("username").isValid()) {
         QString passwd = query.value("password").toString();
         if (passwd == password) {
+            qDebug()<<"login ok";
             return "loginOK";
         } else {
             qDebug() << "wrong password";
