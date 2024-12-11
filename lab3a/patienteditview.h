@@ -25,6 +25,9 @@ private:
     Ui::PatientEditView *ui;
 
     QDataWidgetMapper *dataMapper;//数据映射
+
+signals:
+    void goPreviousView();
 };
 
 #endif // PATIENTEDITVIEW_H

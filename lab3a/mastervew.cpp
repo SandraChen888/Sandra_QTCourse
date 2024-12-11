@@ -70,7 +70,7 @@ void MasterVew::goPatientView()
     patientView = new PatientView(this);
     pushWidgetToStackView(patientView);
 
-    connect(patientView,SIGNAL(goPatienEditView()),this,SLOT(goPatienEditView()));
+    connect(patientView,SIGNAL(goPatienEditView(int)),this,SLOT(goPatienEditView(int)));
 }
 
 void MasterVew::goPreviousView()
