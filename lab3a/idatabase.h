@@ -4,6 +4,7 @@
 #include <QObject>
 #include <QtSql>
 #include <QSqlDatabase>
+#include <QSqlError>
 
 class IDatabase : public QObject
 {
