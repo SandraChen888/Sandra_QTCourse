@@ -38,6 +38,30 @@ bool IDatabase::initPatientModel()
     return true;
 }
 
+bool IDatabase::searchPatient(QString filter)
+{
+    patienttabModel->setFilter(filter);
+    return patienttabModel->select();
+}
+
+bool IDatabase::deleteCurrentPatient()
+{
+    QModelIndex curIndex = thePatientSelection->currentIndex();//获取当前选择单元格的模型索引
+    patienttabModel->removeRow(curIndex.row());
+    patienttabModel->submitAll();
+    patienttabModel->select();
+}
+
+bool IDatabase::submitPatientEdit()
+{
+    return patienttabModel->submitAll();
+}
+
+void IDatabase::revertPatient()
+{
+    patienttabModel->revertAll();
+}
+
 //QString IDatabase::userLogin(QString userName, QString password)
 //{
 //    //return "loginOK";
