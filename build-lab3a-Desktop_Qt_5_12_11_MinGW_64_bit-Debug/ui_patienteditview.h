@@ -90,6 +90,7 @@ public:
 
         dbSpinWeight = new QSpinBox(layoutWidget);
         dbSpinWeight->setObjectName(QString::fromUtf8("dbSpinWeight"));
+        dbSpinWeight->setMaximum(200);
 
         gridLayout->addWidget(dbSpinWeight, 8, 1, 1, 1);
 
@@ -140,6 +141,7 @@ public:
 
         dbSpinHight = new QSpinBox(layoutWidget);
         dbSpinHight->setObjectName(QString::fromUtf8("dbSpinHight"));
+        dbSpinHight->setMaximum(250);
 
         gridLayout->addWidget(dbSpinHight, 7, 1, 1, 1);
 
