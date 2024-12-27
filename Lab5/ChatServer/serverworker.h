@@ -19,7 +19,7 @@ private:
 
 public slots:
     void onReadyRead();
-    void sentMessage(const QString &text, const QString &type = "message");
+    void sendMessage(const QString &text, const QString &type = "message");
 
 };
 

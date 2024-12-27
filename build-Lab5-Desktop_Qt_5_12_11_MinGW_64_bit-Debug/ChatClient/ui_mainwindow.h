@@ -52,7 +52,7 @@ public:
     QGridLayout *gridLayout;
     QLabel *label_2;
     QLabel *label_3;
-    QLineEdit *lineEdit_2;
+    QLineEdit *usernameEdit;
     QLineEdit *serverEdit;
     QSpacerItem *verticalSpacer;
     QPushButton *loginButton;
@@ -168,10 +168,10 @@ public:
 
         gridLayout->addWidget(label_3, 1, 0, 1, 1);
 
-        lineEdit_2 = new QLineEdit(loginFrame);
-        lineEdit_2->setObjectName(QString::fromUtf8("lineEdit_2"));
+        usernameEdit = new QLineEdit(loginFrame);
+        usernameEdit->setObjectName(QString::fromUtf8("usernameEdit"));
 
-        gridLayout->addWidget(lineEdit_2, 1, 1, 1, 1);
+        gridLayout->addWidget(usernameEdit, 1, 1, 1, 1);
 
         serverEdit = new QLineEdit(loginFrame);
         serverEdit->setObjectName(QString::fromUtf8("serverEdit"));

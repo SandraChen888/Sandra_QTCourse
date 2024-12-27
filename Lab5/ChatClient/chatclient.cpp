@@ -1,31 +1,27 @@
-#include "serverworker.h"
+#include "chatclient.h"
 #include <QDataStream>
 #include <QJsonObject>
 #include <QJsonDocument>
 
-ServerWorker::ServerWorker(QObject *parent) : QObject(parent)
+ChatClient::ChatClient(QObject *parent) : QObject(parent)
 {
-    m_serverSocket = new QTcpSocket(this);
-    connect(m_serverSocket,&QTcpSocket::readyRead,this, &ServerWorker::onReadyRead);
+    m_clientSocket = new QTcpSocket(this);
+
+    connect(m_clientSocket, &QTcpSocket::connected, this, &ChatClient::connected);
+    connect(m_clientSocket, &QTcpSocket::readyRead, this, &ChatClient::onReadyRead);
 }
 
-bool ServerWorker::setSockerDescriptor(qintptr socketDescriptor)
-{
-    return m_serverSocket->setSocketDescriptor(socketDescriptor);
-}
-
-void ServerWorker::onReadyRead()
+void ChatClient::onReadyRead()
 {
     QByteArray jsonData;
-    QDataStream socketStream(m_serverSocket);
+    QDataStream socketStream(m_clientSocket);
     socketStream.setVersion(QDataStream::Qt_5_12);
     // start an infinite loop
     for(;;){
         socketStream.startTransaction();
         socketStream >> jsonData;
         if(socketStream.commitTransaction()){
-            emit logMessage(QString::fromUtf8(jsonData));
-            sendMessage("I recieved message");
+            emit messageReceived(QString::fromUtf8(jsonData));
         }else{
 
             break;
@@ -33,14 +29,14 @@ void ServerWorker::onReadyRead()
     }
 }
 
-void ServerWorker::sendMessage(const QString &text, const QString &type)
+void ChatClient::sendMessage(const QString &text, const QString &type)
 {
-    if(m_serverSocket->state() != QAbstractSocket::ConnectedState)
+    if(m_clientSocket->state() != QAbstractSocket::ConnectedState)
         return;
 
     if(!text.isEmpty()){
         // create a QDataStream operating on the socket
-        QDataStream serverStream(m_serverSocket);
+        QDataStream serverStream(m_clientSocket);
         serverStream.setVersion(QDataStream::Qt_5_12);
 
         // create the JSON we want to send
@@ -51,4 +47,9 @@ void ServerWorker::sendMessage(const QString &text, const QString &type)
         // send the JSON using QDataStream
         serverStream << QJsonDocument(message).toJson();
     }
+}
+
+void ChatClient::connectToServer(const QHostAddress &address, quint16 port)
+{
+    m_clientSocket->connectToHost(address, port);
 }
