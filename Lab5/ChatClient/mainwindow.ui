@@ -51,7 +51,7 @@ border-radius:25px;
     <item row="1" column="0">
      <widget class="QStackedWidget" name="stackedWidget">
       <property name="currentIndex">
-       <number>0</number>
+       <number>1</number>
       </property>
       <widget class="QWidget" name="chatPage">
        <layout class="QVBoxLayout" name="verticalLayout">
@@ -149,10 +149,18 @@ border-radius:25px;
               </widget>
              </item>
              <item row="1" column="1">
-              <widget class="QLineEdit" name="usernameEdit"/>
+              <widget class="QLineEdit" name="usernameEdit">
+               <property name="text">
+                <string>sandra</string>
+               </property>
+              </widget>
              </item>
              <item row="0" column="1">
-              <widget class="QLineEdit" name="serverEdit"/>
+              <widget class="QLineEdit" name="serverEdit">
+               <property name="text">
+                <string>127.0.0.1</string>
+               </property>
+              </widget>
              </item>
             </layout>
            </item>
