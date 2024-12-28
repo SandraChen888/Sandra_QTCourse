@@ -17,12 +17,21 @@ void ChatClient::onReadyRead()
     QDataStream socketStream(m_clientSocket);
     socketStream.setVersion(QDataStream::Qt_5_12);
     // start an infinite loop
-    for(;;){
+    for (;;) {
         socketStream.startTransaction();
         socketStream >> jsonData;
-        if(socketStream.commitTransaction()){
-            emit messageReceived(QString::fromUtf8(jsonData));
-        }else{
+        if (socketStream.commitTransaction()) {
+//            emit messageReceived(QString::fromUtf8(jsonData));
+            QJsonParseError parseError;
+            const QJsonDocument jsonDoc = QJsonDocument::fromJson(jsonData, &parseError);
+            if (parseError.error == QJsonParseError::NoError) {
+
+                if (jsonDoc.isObject()) { // and is a JSON object
+//                    emit logMessage(QJsonDocument(jsonDoc).toJson(QJsonDocument::Compact));
+                    emit jsonReceived(jsonDoc.object());// parse the JSON
+                }
+            }
+        } else {
 
             break;
         }
@@ -31,10 +40,10 @@ void ChatClient::onReadyRead()
 
 void ChatClient::sendMessage(const QString &text, const QString &type)
 {
-    if(m_clientSocket->state() != QAbstractSocket::ConnectedState)
+    if (m_clientSocket->state() != QAbstractSocket::ConnectedState)
         return;
 
-    if(!text.isEmpty()){
+    if (!text.isEmpty()) {
         // create a QDataStream operating on the socket
         QDataStream serverStream(m_clientSocket);
         serverStream.setVersion(QDataStream::Qt_5_12);
@@ -52,4 +61,9 @@ void ChatClient::sendMessage(const QString &text, const QString &type)
 void ChatClient::connectToServer(const QHostAddress &address, quint16 port)
 {
     m_clientSocket->connectToHost(address, port);
+}
+
+void ChatClient::disconnectFromHost()
+{
+    m_clientSocket->disconnectFromHost();
 }

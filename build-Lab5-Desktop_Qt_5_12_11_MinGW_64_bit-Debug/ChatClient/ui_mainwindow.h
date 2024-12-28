@@ -16,7 +16,7 @@
 #include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QLineEdit>
-#include <QtWidgets/QListView>
+#include <QtWidgets/QListWidget>
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QSpacerItem>
@@ -38,7 +38,7 @@ public:
     QVBoxLayout *verticalLayout;
     QHBoxLayout *horizontalLayout;
     QTextEdit *roomTextEdit;
-    QListView *userListView;
+    QListWidget *userListWidget;
     QHBoxLayout *horizontalLayout_2;
     QLineEdit *sayLineEdit;
     QPushButton *sayButton;
@@ -108,11 +108,11 @@ public:
 
         horizontalLayout->addWidget(roomTextEdit);
 
-        userListView = new QListView(chatPage);
-        userListView->setObjectName(QString::fromUtf8("userListView"));
-        userListView->setMaximumSize(QSize(120, 16777215));
+        userListWidget = new QListWidget(chatPage);
+        userListWidget->setObjectName(QString::fromUtf8("userListWidget"));
+        userListWidget->setMaximumSize(QSize(120, 16777215));
 
-        horizontalLayout->addWidget(userListView);
+        horizontalLayout->addWidget(userListWidget);
 
 
         verticalLayout->addLayout(horizontalLayout);
@@ -209,7 +209,7 @@ public:
 
         retranslateUi(MainWindow);
 
-        stackedWidget->setCurrentIndex(0);
+        stackedWidget->setCurrentIndex(1);
 
 
         QMetaObject::connectSlotsByName(MainWindow);
@@ -223,6 +223,8 @@ public:
         logoutButton->setText(QApplication::translate("MainWindow", "\351\200\200\345\207\272", nullptr));
         label_2->setText(QApplication::translate("MainWindow", "\346\234\215\345\212\241\345\231\250\345\234\260\345\235\200", nullptr));
         label_3->setText(QApplication::translate("MainWindow", "\346\230\265\347\247\260", nullptr));
+        usernameEdit->setText(QApplication::translate("MainWindow", "sandra", nullptr));
+        serverEdit->setText(QApplication::translate("MainWindow", "127.0.0.1", nullptr));
         loginButton->setText(QApplication::translate("MainWindow", "\347\231\273\345\275\225\350\201\212\345\244\251\345\256\244", nullptr));
     } // retranslateUi
 
