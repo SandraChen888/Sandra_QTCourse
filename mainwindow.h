@@ -84,6 +84,10 @@ private slots:
 
     void on_currentTab_textChanged();
 
+    void on_recentFile_triggered();
+
+    void on_actionClearRecentFiles_triggered();
+
 private:
     Ui::MainWindow *ui;
 
@@ -93,6 +97,17 @@ private:
     QTabWidget *tabWidget;
     int newCount=0;
     QString filePath;
+
+    // 历史文件
+    QStringList recentFiles;
+    QMenu *recentFilesMenu;
+
+    // 历史文件
+    void updateRecentFilesMenu();
+    void clearRecentFiles();
+    void openRecentFile(const QString &filePath);
+    void loadRecentFiles();
+    void saveRecentFiles();
 
     bool userEditConfirmed();
     void addNewTab(const QString &fileName);

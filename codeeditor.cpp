@@ -19,7 +19,7 @@ void CodeEditor::setTextChanged(bool value)
     textIsChanged = value;
 }
 
-void CodeEditor::setFilePath(QString &fileName)
+void CodeEditor::setFilePath(const QString &fileName)
 {
     filePath = fileName;
 }

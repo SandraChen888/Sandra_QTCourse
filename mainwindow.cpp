@@ -8,7 +8,7 @@
 #include "QTextStream"
 #include "QColorDialog"
 #include "QFontDialog"
-
+#include <QSettings>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -16,13 +16,26 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
 
+    //在 MainWindow 的构造函数中初始化最近文件菜单，并连接相应的信号和槽
+    recentFilesMenu = new QMenu(tr("最近文件"), this);
+    ui->menu->addMenu(recentFilesMenu);
+    connect(recentFilesMenu, &QMenu::triggered, this, &MainWindow::on_recentFile_triggered);
+
+    // 添加清除最近文件记录的菜单项
+    QAction *actionClearRecentFiles = new QAction(tr("清除最近文件记录"), this);
+    connect(actionClearRecentFiles, &QAction::triggered, this, &MainWindow::on_actionClearRecentFiles_triggered);
+    ui->menu->addAction(actionClearRecentFiles);
+
+    // 加载最近文件记录
+    loadRecentFiles();
+    updateRecentFilesMenu();
+
     // 更换tabWidget
     tabWidget = new QTabWidget(this);
     tabWidget->setTabsClosable(true);
     setCentralWidget(tabWidget);
 
     // 添加信号槽
-
     connect(tabWidget, &QTabWidget::tabCloseRequested, this, &MainWindow::on_tabCloseRequested);
 
     // 默认添加一个 CodeEditor 标签页
@@ -64,6 +77,108 @@ MainWindow::MainWindow(QWidget *parent)
     ui->actionToolBar->setChecked(true);
     ui->actionStausBar->setChecked(true);
     on_actionShowLine_triggered(false);
+}
+
+void MainWindow::openRecentFile(const QString &filePath)
+{
+    if (!recentFiles.contains(filePath)) {
+        recentFiles.removeAll(filePath); // 移除旧的条目
+        recentFiles.prepend(filePath);// 添加到列表开头
+        if (recentFiles.size() > 10) {
+            recentFiles.removeLast();
+        }
+    }
+    updateRecentFilesMenu();
+    saveRecentFiles(); // 保存最近文件列表
+
+    // 打开文件的逻辑
+    CodeEditor *editor = new CodeEditor(this);
+    QFile file(filePath);
+    if (file.open(QIODevice::ReadOnly | QIODevice::Text)) {
+        QTextStream in(&file);
+        editor->setPlainText(in.readAll());
+        file.close();
+    }
+    editor->setFilePath(filePath);//记录文件路径
+    tabWidget->addTab(editor, QFileInfo(filePath).fileName());
+    connect(editor, &CodeEditor::textChanged1, this, &MainWindow::on_currentTab_textChanged);
+    QString tabTitle = QFileInfo(filePath).fileName();
+    tabWidget->addTab(editor, tabTitle);
+
+    // 设置当前标签页为新建页
+    tabWidget->setCurrentWidget(editor);
+    this->setWindowTitle(QFileInfo(filePath).absolutePath());
+
+    editor->setTextChanged(false);
+}
+
+
+// 打开文件
+void MainWindow::on_actionOpen_triggered()
+{
+    QString fileName = QFileDialog::getOpenFileName(this,"打开文件",".",tr("Text files (*.txt) ;; All (*.*)"));
+
+    if (fileName.isEmpty()) {
+        return; // 用户取消选择
+    }
+
+    openRecentFile(fileName);
+}
+
+void MainWindow::updateRecentFilesMenu()
+{
+    recentFilesMenu->clear();
+    for (const QString &filePath : recentFiles) {
+        QAction *action = new QAction(QFileInfo(filePath).fileName(), this);
+        action->setData(filePath);
+        connect(action, &QAction::triggered, this, &MainWindow::on_recentFile_triggered);
+        recentFilesMenu->addAction(action);
+    }
+}
+
+void MainWindow::on_recentFile_triggered()
+{
+    QAction *action = qobject_cast<QAction *>(sender());
+    if (action) {
+        openRecentFile(action->data().toString());
+    }else{
+        qDebug()<<"action is null";
+    }
+}
+
+void MainWindow::clearRecentFiles()
+{
+    recentFiles.clear();
+    updateRecentFilesMenu();
+    saveRecentFiles(); // 保存空的最近文件列表
+}
+
+void MainWindow::on_actionClearRecentFiles_triggered()
+{
+    clearRecentFiles();
+}
+
+void MainWindow::saveRecentFiles()
+{
+    QSettings settings("DGUT", "ZzgEditor");
+    settings.beginWriteArray("recentFiles");
+    for (int i = 0; i < recentFiles.size(); ++i) {
+        qDebug()<<recentFiles[i];
+        settings.setArrayIndex(i);
+        settings.setValue("path", recentFiles[i]);
+    }
+    settings.endArray();
+}
+
+void MainWindow::loadRecentFiles()
+{
+    QSettings settings("DGUT", "ZzgEditor");
+    int size = settings.beginReadArray("recentFiles");
+    for (int i = 0; i < size; ++i) {
+        settings.setArrayIndex(i);
+        recentFiles.append(settings.value("path").toString());
+    }
+    settings.endArray();
 }
 
 CodeEditor *MainWindow::currentEditor()
@@ -114,42 +229,7 @@ void MainWindow::on_actionNew_triggered()
     addNewTab("");
 }
 
-// 打开文件
-void MainWindow::on_actionOpen_triggered()
-{
-    QString fileName = QFileDialog::getOpenFileName(this,"打开文件",".",tr("Text files (*.txt) ;; All (*.*)"));
 
-    if (fileName.isEmpty()) {
-        return; // 用户取消选择
-    }
-
-    QFile file(fileName);
-
-    if(!file.open(QFile::ReadOnly|QFile::Text)){
-        QMessageBox::warning(this, tr("打开文件"), tr("无法打开文件: %1").arg(fileName));
-        return;
-    }
-
-    QTextStream in(&file);
-    QString text = in.readAll();
-    file.close();
-
-    CodeEditor *codeEditor = new CodeEditor();
-    connect(codeEditor, &CodeEditor::textChanged1, this, &MainWindow::on_currentTab_textChanged);
-    codeEditor->insertPlainText(text);
-    codeEditor->setFilePath(fileName);//记录文件路径
-
-    QString tabTitle = QFileInfo(fileName).fileName();
-    tabWidget->addTab(codeEditor, tabTitle);
-
-
-    // 设置当前标签页为新建页
-    tabWidget->setCurrentWidget(codeEditor);
-
-    this->setWindowTitle(QFileInfo(fileName).absolutePath());
-
-    codeEditor->setTextChanged(false);
-}
 
 // *保存当前文件*
 void MainWindow::on_actionSave_triggered()

@@ -12,9 +12,9 @@ class CodeEditor : public QPlainTextEdit
 public:
     CodeEditor(QWidget *parent = nullptr);
     QString filePath = "";
-    bool textIsChanged = true;
+    bool textIsChanged = false;
     void setTextChanged(bool value);
-    void setFilePath(QString &fileName);
+    void setFilePath(const QString &fileName);
 
     void lineNumberAreaPaintEvent(QPaintEvent *event);
     int lineNumberAreaWidth();
