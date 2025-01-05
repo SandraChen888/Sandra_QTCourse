@@ -1,8 +1,19 @@
 #include "codeeditor.h"
 #include "QPainter"
-#include "QTextBlock"
+#include <QMouseEvent>
+#include <QDesktopServices>
+#include <QTextBlock>
+#include <QTextCursor>
+#include <QTextDocument>
+#include <QRegularExpression>
+
 CodeEditor::CodeEditor(QWidget *parent) : QPlainTextEdit(parent)
 {
+    // 初始化正则表达式，用于检测 URL 和邮件地址
+    urlRegex.setPattern(R"(\b(?:https?|ftp|file)://[-A-Za-z0-9+&@#/%?=~_|!:,.;]*[-A-Za-z0-9+&@#/%=~_|]|mailto:[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z]{2,})");
+    urlRegex.setPatternOptions(QRegularExpression::CaseInsensitiveOption);
+
+
     lineNumberArea = new LineNumberArea(this);
 
     connect(this, &CodeEditor::blockCountChanged, this, &CodeEditor::updateLineNumberAreaWidth);
@@ -12,6 +23,27 @@ CodeEditor::CodeEditor(QWidget *parent) : QPlainTextEdit(parent)
 
     updateLineNumberAreaWidth(0);
     highlightCurrentLine();
+}
+
+void CodeEditor::mousePressEvent(QMouseEvent *event)
+{
+    QPlainTextEdit::mousePressEvent(event);
+    cursor = textCursor();
+    cursor.setPosition(cursor.position(), QTextCursor::MoveAnchor);
+}
+
+void CodeEditor::mouseReleaseEvent(QMouseEvent *event)
+{
+    QPlainTextEdit::mouseReleaseEvent(event);
+    QTextCursor cursor = textCursor();
+    cursor.setPosition(cursor.position(), QTextCursor::KeepAnchor);
+
+    QString selectedText = cursor.selectedText();
+    QRegularExpressionMatch match = urlRegex.match(selectedText);
+    if (match.hasMatch()) {
+        clickedUrl = QUrl(match.captured());
+        QDesktopServices::openUrl(clickedUrl);
+    }
 }
 
 void CodeEditor::setTextChanged(bool value)

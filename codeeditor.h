@@ -4,6 +4,9 @@
 #include <QObject>
 #include <QPlainTextEdit>
 #include <QString>
+#include <QTextDocument>
+#include <QTextCursor>
+#include <QRegularExpression>
 
 class CodeEditor : public QPlainTextEdit
 {
@@ -25,6 +28,9 @@ signals:
 protected:
     void resizeEvent(QResizeEvent *event) override;
 
+    void mousePressEvent(QMouseEvent *event) override;
+    void mouseReleaseEvent(QMouseEvent *event) override;
+
 private slots:
     void updateLineNumberAreaWidth(int newBlockCount);
     void highlightCurrentLine();
@@ -36,6 +42,10 @@ public slots:
 
 private:
     QWidget *lineNumberArea;
+
+    QRegularExpression urlRegex;
+    QTextCursor cursor;
+    QUrl clickedUrl;
 };
 
 class LineNumberArea : public QWidget
