@@ -22,6 +22,10 @@ public:
     void lineNumberAreaPaintEvent(QPaintEvent *event);
     int lineNumberAreaWidth();
 
+    // 书签功能
+    void saveBookmarks(const QString &filePath);
+    void loadBookmarks(const QString &filePath);
+
 signals:
     void textChanged1(); // 定义一个信号
 
@@ -46,6 +50,9 @@ private:
     QRegularExpression urlRegex;
     QTextCursor cursor;
     QUrl clickedUrl;
+
+    // 书签存储
+    QMap<int, QString> bookmarks;
 };
 
 class LineNumberArea : public QWidget

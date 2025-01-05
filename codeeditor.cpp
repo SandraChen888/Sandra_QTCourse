@@ -6,6 +6,10 @@
 #include <QTextCursor>
 #include <QTextDocument>
 #include <QRegularExpression>
+#include <QFileInfo>
+#include <QJsonArray>
+#include <QJsonObject>
+#include <QJsonDocument>
 
 CodeEditor::CodeEditor(QWidget *parent) : QPlainTextEdit(parent)
 {
@@ -23,6 +27,58 @@ CodeEditor::CodeEditor(QWidget *parent) : QPlainTextEdit(parent)
 
     updateLineNumberAreaWidth(0);
     highlightCurrentLine();
+}
+
+// 保存书签
+void CodeEditor::saveBookmarks(const QString &filePath)
+{
+    QFileInfo fileInfo(filePath);
+    QString bookmarkFilePath = fileInfo.absolutePath() + "/" + fileInfo.baseName() + ".bookmarks";
+
+    QJsonArray bookmarksArray;
+    for (auto it = bookmarks.constBegin(); it != bookmarks.constEnd(); ++it) {
+        QJsonObject bookmarkObject;
+        bookmarkObject["lineNumber"] = it.key();  // 获取键（行号）
+        bookmarkObject["description"] = it.value();  // 获取值（描述）
+        bookmarksArray.append(bookmarkObject);
+    }
+
+    QJsonObject rootObject;
+    rootObject["bookmarks"] = bookmarksArray;
+
+    QJsonDocument document(rootObject);
+    QByteArray data = document.toJson();
+
+    QFile file(bookmarkFilePath);
+    if (file.open(QIODevice::WriteOnly)) {
+        file.write(data);
+        file.close();
+    }
+}
+
+// 加载书签
+void CodeEditor::loadBookmarks(const QString &filePath)
+{
+    QFileInfo fileInfo(filePath);
+    QString bookmarkFilePath = fileInfo.absolutePath() + "/" + fileInfo.baseName() + ".bookmarks";
+
+    QFile file(bookmarkFilePath);
+    if (file.open(QIODevice::ReadOnly)) {
+        QByteArray data = file.readAll();
+        file.close();
+
+        QJsonDocument document(QJsonDocument::fromJson(data));
+        QJsonObject rootObject = document.object();
+        QJsonArray bookmarksArray = rootObject["bookmarks"].toArray();
+
+        bookmarks.clear();
+        for (const QJsonValue &value : bookmarksArray) {
+            QJsonObject bookmarkObject = value.toObject();
+            int lineNumber = bookmarkObject["lineNumber"].toInt();
+            QString description = bookmarkObject["description"].toString();
+            bookmarks[lineNumber] = description;
+        }
+    }
 }
 
 void CodeEditor::mousePressEvent(QMouseEvent *event)

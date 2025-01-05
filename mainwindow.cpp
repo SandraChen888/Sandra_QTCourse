@@ -9,6 +9,7 @@
 #include "QColorDialog"
 #include "QFontDialog"
 #include <QSettings>
+#include <QDebug>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -100,6 +101,9 @@ void MainWindow::openRecentFile(const QString &filePath)
         file.close();
     }
     editor->setFilePath(filePath);//记录文件路径
+    //加载书签
+    editor->loadBookmarks(filePath);
+
     tabWidget->addTab(editor, QFileInfo(filePath).fileName());
     connect(editor, &CodeEditor::textChanged1, this, &MainWindow::on_currentTab_textChanged);
     QString tabTitle = QFileInfo(filePath).fileName();
@@ -275,6 +279,8 @@ void MainWindow::on_actionSave_triggered()
     out<<text;
     file.flush();
     file.close();
+
+    codeEditor->saveBookmarks(filePath); // 保存书签
 
     this->setWindowTitle(tr("%1 - 编辑器").arg(QFileInfo(currentFilePath).absoluteFilePath()));
 
