@@ -2,86 +2,52 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
-#include <QLabel>
 
-QT_BEGIN_NAMESPACE
-namespace Ui { class MainWindow; }
-QT_END_NAMESPACE
+namespace Ui {
+class MainWindow;
+}
+
 
 class MainWindow : public QMainWindow
 {
     Q_OBJECT
 
+
 public:
-    MainWindow(QWidget *parent = nullptr);
+    explicit MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
+
 private slots:
-    void on_actionAbout_triggered();
-
-    void on_actionFind_triggered();
-
-    void on_actionReplace_triggered();
-
     void on_actionNew_triggered();
-
     void on_actionOpen_triggered();
-
     void on_actionSave_triggered();
-
     void on_actionSaveAs_triggered();
-
-    void on_TextEdit_textChanged();
-
-    void on_actionUndo_triggered();
-
-    void on_actionRedo_triggered();
-
-    void on_actionCut_triggered();
-
-    void on_actionCopy_triggered();
-
-    void on_actionPaste_triggered();
-
-    void on_actionTextColor_triggered();
-
-    void on_actionEditorBackgroundColor_triggered();
-
-    void on_actionTextBackgroundColor_triggered();
-
-    void on_actionWrap_triggered();
-
-    void on_actionFont_triggered();
-
-    void on_actionToolbar_triggered();
-
-    void on_actionStatusbar_triggered();
-
-    void on_actionSelectAll_triggered();
-
+    void on_actionClose_triggered();
     void on_actionExit_triggered();
-
-    void on_TextEdit_copyAvailable(bool b);
-
-    void on_TextEdit_redoAvailable(bool b);
-
-    void on_TextEdit_undoAvailable(bool b);
-
-    void on_TextEdit_cursorPositionChanged();
-
-    void on_actionLineNumber_triggered();
-
-//    void on_actionLineNumber_triggered(bool checked);
+    void on_actionUndo_triggered();
+    void on_actionRedo_triggered();
+    void on_actionCut_triggered();
+    void on_actionCopy_triggered();
+    void on_actionPaste_triggered();
+    void on_actionSelectAll_triggered();
+    void on_actionFind_triggered();
+    void on_actionReplace_triggered();
+    void on_actionToolbar_triggered();
 
 private:
     Ui::MainWindow *ui;
+    QTabWidget *tabWidget;
+    QStringList filePaths; // 存储打开文件的路径
+    int currentIndex; // 当前选中的标签页索引
+    bool isTextChanged; // 标记当前标签页文本是否已修改
 
-    QLabel statusCursorLabel;
-    QLabel statusLable;
-
-    QString filePath;
-    bool textChanged;
-
-    bool userEditConfirmed();
+    void setupEditorConnections(CodeEditor *editor);
+    bool confirmSaveChanges();
+    void updateTabTitle(int index, bool changed);
+    void updateStatusBar(int index);
+    QString getCurrentFilePath();
+    void openFile(const QString &filePath);
 };
+
 #endif // MAINWINDOW_H
